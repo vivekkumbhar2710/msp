@@ -1,0 +1,332 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:Prod-{DD}-{MM}-{YY}-{#####}",
+ "creation": "2023-06-27 17:20:14.541687",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "date",
+  "posting_time",
+  "column_break_2jl4x",
+  "supervisor",
+  "operator",
+  "job_order",
+  "column_break_y1py8",
+  "supervisor_name",
+  "operator_name",
+  "column_break_gvuyd",
+  "shift_time",
+  "required_time",
+  "column_break_pgxlt",
+  "expense_account_for_wages",
+  "wages",
+  "do_not_delete",
+  "section_break_tfgrr",
+  "items",
+  "column_break_em55u",
+  "raw_items",
+  "section_break_tnkpx",
+  "item_operations",
+  "section_break_mbdei",
+  "qty_details",
+  "section_break_ztqrp",
+  "total_qty",
+  "column_break_ia6pd",
+  "total_earned_minutes",
+  "column_break_bkgdk",
+  "time_difference",
+  "section_break_tzizq",
+  "tooling_details",
+  "section_break_ixblj",
+  "consumable_details",
+  "section_break_upnef",
+  "rejected_items_reasons",
+  "section_break_bnvja",
+  "downtime_reason_details",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "downtime_reason_details",
+   "fieldtype": "Table",
+   "label": "Downtime Reason Details",
+   "options": "Downtime Reason Details"
+  },
+  {
+   "fieldname": "column_break_2jl4x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_tzizq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "480",
+   "fetch_from": "shift_time.minutes",
+   "fieldname": "required_time",
+   "fieldtype": "Float",
+   "label": "Required Time"
+  },
+  {
+   "fieldname": "consumable_details",
+   "fieldtype": "Table",
+   "label": "Consumable Details",
+   "options": "Consumable Details"
+  },
+  {
+   "fieldname": "section_break_upnef",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Production",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_tnkpx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_bnvja",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_tfgrr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Finished Items",
+   "options": "Items Production",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_em55u",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "supervisor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supervisor",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "operator",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Operator",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "default": "8 Hours 1 shift",
+   "fieldname": "shift_time",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Shift Time",
+   "options": "Shift Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_operations",
+   "fieldtype": "Table",
+   "label": "Item operations",
+   "options": "Item operations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_mbdei",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qty_details",
+   "fieldtype": "Table",
+   "label": "Quantity Details",
+   "options": "Qty Details",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "item.raw_material",
+   "fieldname": "raw_items",
+   "fieldtype": "Table",
+   "label": "Raw Items",
+   "options": "Raw Items Production",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_earned_minutes",
+   "fieldtype": "Float",
+   "label": "Total Earned Minutes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ia6pd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bkgdk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ztqrp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_ixblj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "time_difference",
+   "fieldtype": "Float",
+   "label": "Time Difference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tooling_details",
+   "fieldtype": "Table",
+   "label": "Tooling Details",
+   "options": "Tooling Details"
+  },
+  {
+   "fieldname": "rejected_items_reasons",
+   "fieldtype": "Table",
+   "ignore_user_permissions": 1,
+   "label": "Rejected Items Reasons",
+   "options": "Item Rejection Reason"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "wages",
+   "fieldtype": "Currency",
+   "label": "Wages",
+   "read_only": 1
+  },
+  {
+   "default": "Expenses Included In Asset Valuation - PEPL",
+   "fieldname": "expense_account_for_wages",
+   "fieldtype": "Link",
+   "label": "Expense Account For Wages ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "job_order",
+   "fieldtype": "Table MultiSelect",
+   "label": "Job Order",
+   "options": "Job Order Multi Select"
+  },
+  {
+   "fieldname": "do_not_delete",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Do Not Delete",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_gvuyd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pgxlt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_y1py8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supervisor.employee_name",
+   "fieldname": "supervisor_name",
+   "fieldtype": "Data",
+   "label": "Supervisor Name"
+  },
+  {
+   "fetch_from": "operator.employee_name",
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Operator Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "production_entry",
+   "table_fieldname": "stock enry"
+  },
+  {
+   "link_doctype": "Material Cycle Time",
+   "link_fieldname": "name"
+  },
+  {
+   "link_doctype": "Material Request",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2023-11-24 10:35:16.997946",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Production",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "do_not_delete",
+ "sort_field": "modified",
+ "sort_order": "ASC",
+ "states": []
+}

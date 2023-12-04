@@ -1,0 +1,41 @@
+{
+ "cards": [],
+ "charts": [
+  {
+   "chart": "Production Ok Quantity",
+   "width": "Half"
+  },
+  {
+   "chart": "Downstream Processs",
+   "width": "Half"
+  },
+  {
+   "chart": "Production Analysis",
+   "width": "Half"
+  },
+  {
+   "chart": "Production Wages",
+   "width": "Half"
+  },
+  {
+   "chart": "Stock Entry",
+   "width": "Half"
+  },
+  {
+   "chart": "Downstream Processs Employee",
+   "width": "Half"
+  }
+ ],
+ "creation": "2023-10-19 12:08:22.605757",
+ "dashboard_name": "Machineshop",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2023-11-29 12:42:56.246852",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machineshop",
+ "owner": "Administrator"
+}

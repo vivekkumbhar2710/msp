@@ -1,0 +1,28 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-11-25 11:42:41.954168",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"filters\":[],\"fields\":[[\"name\",\"Wages Master\"],[\"employee\",\"Wages Master\"],[\"employee_name\",\"Wages Master\"],[\"company\",\"Wages Master\"],[\"from_date\",\"Child Wages Master\"],[\"wages_per_hour\",\"Child Wages Master\"],[\"owner\",\"Wages Master\"]],\"order_by\":\"`tabWages Master`.`modified` desc\",\"add_totals_row\":0,\"page_length\":20,\"column_widths\":{\"name\":120,\"employee\":120,\"employee_name\":120,\"company\":120,\"Child Wages Master:from_date\":120,\"Child Wages Master:wages_per_hour\":77,\"owner\":229},\"group_by\":null}",
+ "letter_head": "Foundry Letterhead",
+ "modified": "2023-11-29 12:06:39.966186",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Employee wages Report",
+ "owner": "mayuresh.bhosale@erpdata.in",
+ "prepared_report": 0,
+ "ref_doctype": "Wages Master",
+ "report_name": "Employee wages Report",
+ "report_type": "Report Builder",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}

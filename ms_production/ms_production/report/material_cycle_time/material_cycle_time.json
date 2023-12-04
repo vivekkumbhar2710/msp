@@ -1,0 +1,28 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-11-24 12:13:54.184016",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"filters\":[],\"fields\":[[\"name\",\"Material Cycle Time\"],[\"operation\",\"Machine Item\"],[\"item\",\"Material Cycle Time\"],[\"item_name\",\"Material Cycle Time\"],[\"from_date\",\"Material Cycle Time\"],[\"raw_item\",\"Material Cycle Time\"],[\"raw_item_name\",\"Material Cycle Time\"],[\"required_qty\",\"Material Cycle Time\"],[\"qty\",\"Raw Item Child\"],[\"cycle_time\",\"Machine Item\"],[\"operation_name\",\"Machine Item\"],[\"downstream_process\",\"Raw Item Child\"],[\"item\",\"Raw Item Child\"],[\"item_name\",\"Raw Item Child\"],[\"company\",\"Material Cycle Time\"]],\"order_by\":\"`tabMaterial Cycle Time`.`modified` desc\",\"add_totals_row\":0,\"page_length\":40,\"column_widths\":{\"name\":120,\"Machine Item:operation\":120,\"item\":137,\"item_name\":151,\"from_date\":120,\"raw_item\":120,\"raw_item_name\":120,\"required_qty\":120,\"Raw Item Child:qty\":120,\"Machine Item:cycle_time\":120,\"Machine Item:operation_name\":120,\"Raw Item Child:downstream_process\":120,\"Raw Item Child:item\":120,\"Raw Item Child:item_name\":120,\"company\":148},\"group_by\":null}",
+ "letter_head": "Foundry Letterhead",
+ "modified": "2023-11-29 12:06:43.737266",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Material Cycle Time",
+ "owner": "mayuresh.bhosale@erpdata.in",
+ "prepared_report": 0,
+ "ref_doctype": "Material Cycle Time",
+ "report_name": "Material Cycle Time",
+ "report_type": "Report Builder",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}
