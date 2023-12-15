@@ -14,10 +14,12 @@ class DownstreamProcesses(Document):
 		for d in self.get("production"):
 			items_doc= frappe.get_all("Items Production" ,
 												filters = {"parent": str(d.production)},
-												fields = ["job_order","item","item_name","target_warehouse"])
+												fields = ["job_order","item","item_name","target_warehouse",'name'])
 			for i in items_doc:
 				self.append("items",{
 						'job_order': (i.job_order) ,
+						'production': (d.production),
+						'reference_id': i.name,
 						'item': str(i.item),
 						'item_name': str(i.item_name),
 						'target_warehouse': t__w ,
@@ -45,6 +47,8 @@ class DownstreamProcesses(Document):
 
 					self.append("raw_items",{
 										'job_order': i.job_order,
+										'production':i.production,
+										'reference_id':i.reference_id,
 										'item': str(i.item),
 										'item_name': str(i.item_name),
 										'raw_item': me.item,
@@ -58,6 +62,8 @@ class DownstreamProcesses(Document):
 
 				self.append("qty_details",{
 									'job_order': i.job_order,
+									'production':i.reference_id,
+									'reference_id':i.name,
 									'item': str(i.item),
 									'operation': self.downstream_process,
 									
@@ -72,6 +78,8 @@ class DownstreamProcesses(Document):
 						if kaju:
 							for y in kaju:
 								self.append("raw_items",{
+													'production':i.production,
+													'reference_id':i.reference_id,
 													'item': str(i.item),
 													'item_name': str(i.item_name),
 													'raw_item': y.item,
@@ -84,6 +92,8 @@ class DownstreamProcesses(Document):
 								
 				self.append("qty_details",{
 						'job_order': i.job_order,
+						'production':i.production,
+						'reference_id':i.reference_id,
 						'item': str(i.item),
 						'operation': self.downstream_process,
 						
@@ -110,6 +120,7 @@ class DownstreamProcesses(Document):
 				self.append("rejected_items_reasons",{
 							'job_order': l.job_order,
 							'finished_item': l.item,
+							'reference_id': l.reference_id,
 							'rejection_type': "MR",
 							'qty': l.mr_qty,
 							'target_warehouse':frappe.get_value("Machine Shop Setting",self.company,"mr_warehouse_dp"),
@@ -119,6 +130,7 @@ class DownstreamProcesses(Document):
 				self.append("rejected_items_reasons",{
 							'job_order': l.job_order,
 							'finished_item': l.item,
+							'reference_id': l.reference_id,
 							'rejection_type': "CR",
 							'qty': l.cr_qty,
 							'target_warehouse':frappe.get_value("Machine Shop Setting",self.company,"cr_warehouse_dp"),
@@ -128,6 +140,7 @@ class DownstreamProcesses(Document):
 				self.append("rejected_items_reasons",{
 							'job_order': l.job_order,
 							'finished_item': l.item,
+							'reference_id': l.reference_id,
 							'rejection_type': "RW",
 							'qty': l.rw_qty,
 							'target_warehouse':frappe.get_value("Machine Shop Setting",self.company,"rw_warehouse_dp"),
@@ -153,9 +166,9 @@ class DownstreamProcesses(Document):
 			se.company = self.company
 			se.posting_date = self.date
 			peacock = len(self.get("raw_items"))
-			for g in self.get("raw_items"):
+			for g in self.get("raw_items" ,filters = {"reference_id": p.reference_id , }):  # filters = {"": , "": }
 				if (str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item == g.raw_item ):
-					for b in self.get("qty_details"):
+					for b in self.get("qty_details",filters = {"reference_id": p.reference_id , }):
 						if  (str(p.job_order) == str(b.job_order)) and (p.item == b.item):
 							se.append(
 									"items",
@@ -200,9 +213,9 @@ class DownstreamProcesses(Document):
 			se.posting_date = self.date
 			peahen = len(self.get("raw_items"))
 			for p in self.get("items"):
-				for g in self.get("raw_items"):
+				for g in self.get("raw_items" ,filters = {"reference_id": p.reference_id , }):
 					if (str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item == g.raw_item ):
-						for b in self.get("rejected_items_reasons"):
+						for b in self.get("rejected_items_reasons",filters = {"reference_id": p.reference_id , }):
 							if  (str(p.job_order) == str(b.job_order)) and (p.item == b.finished_item):
 								se.append(
 										"items",

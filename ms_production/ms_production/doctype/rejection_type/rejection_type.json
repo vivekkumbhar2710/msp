@@ -8,6 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "type"
  ],
  "fields": [
@@ -16,11 +17,17 @@
    "fieldtype": "Data",
    "label": "Type",
    "unique": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-11 11:37:45.226324",
+ "modified": "2023-12-14 14:18:33.457330",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Rejection Type",

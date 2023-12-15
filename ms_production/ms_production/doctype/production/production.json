@@ -24,6 +24,7 @@
   "column_break_pgxlt",
   "expense_account_for_wages",
   "wages",
+  "ready_to_downstream",
   "do_not_delete",
   "section_break_tfgrr",
   "items",
@@ -283,6 +284,13 @@
    "fieldname": "operator_name",
    "fieldtype": "Data",
    "label": "Operator Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "ready_to_downstream",
+   "fieldtype": "Check",
+   "label": "Ready To Downstream",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -302,7 +310,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2023-11-24 10:35:16.997946",
+ "modified": "2023-12-14 11:14:34.130878",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Production",

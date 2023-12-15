@@ -1,0 +1,26 @@
+[
+ {
+  "company": null,
+  "docstatus": 0,
+  "doctype": "Rejection Type",
+  "modified": "2023-08-11 11:37:51.392109",
+  "name": "MR",
+  "type": "MR"
+ },
+ {
+  "company": null,
+  "docstatus": 0,
+  "doctype": "Rejection Type",
+  "modified": "2023-08-11 11:38:12.025219",
+  "name": "CR",
+  "type": "CR"
+ },
+ {
+  "company": null,
+  "docstatus": 0,
+  "doctype": "Rejection Type",
+  "modified": "2023-08-13 12:49:00.897993",
+  "name": "RW",
+  "type": "RW"
+ }
+]

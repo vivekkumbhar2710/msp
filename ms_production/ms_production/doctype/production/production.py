@@ -289,7 +289,7 @@ class Production(Document):
 		downtime_time=0.0
 		for i in self.get('downtime_reason_details'):
 			downtime_time=downtime_time+i.time
-   
+		
 		total = getVal(self.total_earned_minutes)
 		current_time_diff= getVal(self.time_difference)
 		shift_time = getVal(self.required_time)
@@ -342,6 +342,7 @@ class Production(Document):
 
 	def before_submit(self):
 		self.setdatainitemfield()
+		self.check_downstram_ready()
 		
 
     	# pass
@@ -431,7 +432,6 @@ class Production(Document):
    
 	@frappe.whitelist()
 	def set_filters_IOM(self):
-		# frappe.throw("hiiii")
 		final_list =[]
 		result_list =[]
 		for d in self.get('items'):
@@ -444,6 +444,7 @@ class Production(Document):
 						result_list.append(p.operation)
 			elif d.item:
 				frappe.msgprint(f'There is no item {d.item} prent in "Material Cycle Time"')
+			break
 		return final_list,result_list
 
 	@frappe.whitelist()
@@ -456,7 +457,6 @@ class Production(Document):
 
 	@frappe.whitelist()
 	def set_cycle_time(self):
-		# for do in self.get('items'):
 		for v in self.get('item_operations'):
 			v.cycle_time=0
 			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
@@ -465,7 +465,7 @@ class Production(Document):
 					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time'])
 					if kaju:
 						v.cycle_time=kaju[0].cycle_time
-					elif v.operation :
+					elif v.operation:
 						frappe.throw(f'There is no Operation "{v.operation}" in "Material Cycle Time" for item {v.item}')
 			else:
 				frappe.throw(f'There is no item {v.item} present in "Material Cycle Time" for Company {self.company}')
@@ -593,4 +593,40 @@ class Production(Document):
 		# frappe.throw(list_items)
 		self.do_not_delete =str(list_items)
 
+
+	#To update the downstram ready button
+	@frappe.whitelist()
+	def check_downstram_ready(self):
+		for i in self.get("items"):
+			material_cycle_name=frappe.get_value("Material Cycle Time", {"item": i.item}, ["name"])
+			if material_cycle_name:	
+				material_cycle_obj = frappe.get_doc("Material Cycle Time", material_cycle_name)
+				machine_operation_plan = material_cycle_obj.get("machine_operation_plan")			
+				if machine_operation_plan and len(machine_operation_plan) > 0:
+					last_operation=machine_operation_plan[-1].operation
+				else:
+					frappe.throw("Operation plan is empty for Material Cycle Time: {}".format(material_cycle_name))
+				quality_details_table=self.get("qty_details")
+				for j in range(len(quality_details_table)-1,0,-1):
+					if(quality_details_table[j].operation==last_operation):	
+						self.ready_to_downstream=True
+						break
+			else:
+				frappe.throw("Material Cycle Time not found for item: {}".format(i.item))
+    
+    
+	#This method is to get list of operation for item
+	@frappe.whitelist()
+	def get_operation_for_item(self,table_index):
+		opration_list=[]
+		item=self.get("item_operations")[table_index].item
+		material_cycle_name=frappe.get_value("Material Cycle Time", {"item":item}, ["name"])
+		if material_cycle_name:	
+			material_cycle_obj = frappe.get_doc("Material Cycle Time", material_cycle_name)
+			for i in material_cycle_obj.get("machine_operation_plan"):
+				opration_list.append(i.operation)
+		return opration_list
+		
+    
+		
 

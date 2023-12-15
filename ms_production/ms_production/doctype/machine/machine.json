@@ -10,6 +10,9 @@
  "field_order": [
   "machine_name",
   "workstation",
+  "column_break_b6qly",
+  "company",
+  "section_break_i9xwe",
   "machine_operations"
  ],
  "fields": [
@@ -29,11 +32,25 @@
    "fieldtype": "Table",
    "label": "Machine Operations",
    "options": "Machine Operations"
+  },
+  {
+   "fieldname": "column_break_b6qly",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_i9xwe",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-18 10:17:08.571582",
+ "modified": "2023-12-15 10:26:08.796816",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Machine",

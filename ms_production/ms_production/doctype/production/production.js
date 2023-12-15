@@ -1,6 +1,70 @@
 // // Copyright (c) 2023, Abhishek Chougule and contributors
 // // For license information, please see license.txt
 
+frappe.ui.form.on('Items Production', { 
+	item: function(frm) {
+			frappe.call({
+				method: 'set_filters_IOM',
+				doc: frm.doc,
+				callback: function(r) {
+					if(r.message) {
+						var k = r.message[0];
+						var m = r.message[1]; 
+						frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
+							let d = locals[cdt][cdn];
+							return {
+								filters: [['name', 'in',m],]
+							};
+						});
+						      
+					}
+				}
+			});
+			
+		}
+	});
+
+frappe.ui.form.on('Item operations', {
+    machine: function (frm, cdt, cdn) {
+        let d = locals[cdt][cdn];
+        let table = frm.fields_dict['item_operations'].grid;
+        let table_index = table.grid_rows.findIndex(row => row.doc === d);
+        frappe.call({
+            method: "get_operation_for_item",
+            args: {
+                table_index: table_index
+            },
+            doc: frm.doc,
+            callback: function (response) {
+                if (!response.exc) {
+                    var operation_list = response.message;
+                    frm.doc.item_operations[table_index].operation_list = operation_list;
+                    table.get_field('operation').get_query = function (doc, cdt, cdn) {
+                        let d = locals[cdt][cdn];
+                        let row_operation_list = d.operation_list || [];
+                        return {
+                            filters: [['Operation Master', 'name', 'in', row_operation_list]]
+                        };
+                    };
+                    table.refresh_field('operation');
+                }
+            }
+        });
+    },
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // // frappe.ui.form.on('Production', {
@@ -30,19 +94,9 @@
 
 
 
-// frappe.ui.form.on('Production', {
-// 	refresh: function(frm) {
-// 		frm.set_query("raw_item", "raw_items", function(doc, cdt, cdn) {
-// 			let d = locals[cdt][cdn];
-// 			return {
 
-// 				filters: [
-// 				  ['Item', 'item_group', '=', "Raw Material"],
-// 				]
-// 			};
-// 		});
-// 	},
-// });
+
+
 
 // frappe.ui.form.on('Production', {
 // 	refresh: function(frm) {
@@ -174,30 +228,29 @@
 // 	}
 // }); 
 
-// // frappe.ui.form.on('Items Production', { 
-// // 	item: function(frm) {
- 
-// // 			frappe.call({
-// // 				method: 'set_filters_IOM',
-// // 				doc: frm.doc,
-// // 				callback: function(r) {
-// // 					if(r.message) {
-// // 						var k = r.message[0];
-// // 						var m = r.message[1]; 
-// // 						frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
-// // 							let d = locals[cdt][cdn];
-// // 							return {
-// // 								filters: [['name', 'in',m],]
-// // 							};
-// // 						});
+// frappe.ui.form.on('Items Production', { 
+// 	item: function(frm) {
+// 			frappe.call({
+// 				method: 'set_filters_IOM',
+// 				doc: frm.doc,
+// 				callback: function(r) {
+// 					if(r.message) {
+// 						var k = r.message[0];
+// 						var m = r.message[1]; 
+// 						frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
+// 							let d = locals[cdt][cdn];
+// 							return {
+// 								filters: [['name', 'in',m],]
+// 							};
+// 						});
 						      
 					
-// // 					}
-// // 				}
-// // 			});
+// 					}
+// 				}
+// 			});
 			
-// // 		}
-// // 	});
+// 		}
+// 	});
 
 // 	// frappe.ui.form.on('Production', {
 // 	// 	refresh: function(frm) {
@@ -389,7 +442,7 @@
 // frappe.ui.form.on('Qty Details', {
 // 	cr_qty(frm,cdt,cdn) {
 // 		var row = locals[cdt][cdn];
-// 		frm.clear_table("rejected_items_reasons")
+// 		frm.clear_table("	")
 // 		frm.call({
 // 			method:'calculate_rejection_qty',
 // 			doc:frm.doc,
@@ -709,35 +762,6 @@
 
 
 
-frappe.ui.form.on('Production', {
-	refresh: function(frm) {
-		frm.set_query("raw_item", "raw_items", function(doc, cdt, cdn) {
-			let d = locals[cdt][cdn];
-			return {
-
-				filters: [
-				  ['Item', 'item_group', '=', "Raw Material"],
-				]
-			};
-		});
-	},
-});
-
-frappe.ui.form.on('Production', {
-	refresh: function(frm) {
-		frm.set_query("tooling_item", "tooling_details", function(doc, cdt, cdn) {
-			let d = locals[cdt][cdn];
-			return {
-
-				filters: [
-				  ['Item', 'item_group', '=', "Tooling"],
-				]
-			};
-		});
-	},
-});
-
-
 frappe.ui.form.on("Production", {
     setup: function(frm) {
             frm.set_query("job_order", function() { // Replace with the name of the link field
@@ -778,7 +802,7 @@ frappe.ui.form.on('Item operations', {
 			method: 'set_cycle_time',
 			doc: frm.doc,
 		});
-		frm.refresh_field('cycle_time');
+		// frm.refresh_field('cycle_time');
 		// frm.refresh_field('taxes');
 	}
 }); 

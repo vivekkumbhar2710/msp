@@ -217,3 +217,13 @@ doc_events = {
         # "before_save": "ms_production.ms_production.doctype.production.events.on_status_click"
     # }
 }
+
+fixtures = [
+    {
+        "doctype": "Client Script",
+        "filters": [
+            ["name", "in", ["Filter-Proudction","Filter-Material Cycle Time","Filter-Downstream Processes"]],
+        ]
+    },
+    "Rejection Type"
+]
