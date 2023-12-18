@@ -25,6 +25,7 @@
   "expense_account_for_wages",
   "wages",
   "ready_to_downstream",
+  "is_job_order_applicable",
   "do_not_delete",
   "section_break_tfgrr",
   "items",
@@ -242,6 +243,7 @@
    "options": "Account"
   },
   {
+   "depends_on": "eval:doc.is_job_order_applicable==1;",
    "fieldname": "job_order",
    "fieldtype": "Table MultiSelect",
    "label": "Job Order",
@@ -291,6 +293,12 @@
    "fieldtype": "Check",
    "label": "Ready To Downstream",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_job_order_applicable",
+   "fieldtype": "Check",
+   "label": "Is Job Order Applicable"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -310,7 +318,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2023-12-14 11:14:34.130878",
+ "modified": "2023-12-15 15:46:26.577208",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Production",

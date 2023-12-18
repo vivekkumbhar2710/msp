@@ -1,93 +1,128 @@
 {
-    "actions": [],
-    "allow_rename": 1,
-    "creation": "2023-10-12 08:55:15.818344",
-    "default_view": "List",
-    "doctype": "DocType",
-    "editable_grid": 1,
-    "engine": "InnoDB",
-    "field_order": [
-     "production",
-     "reference_id",
-     "job_order",
-     "item",
-     "item_name",
-     "target_warehouse",
-     "qty",
-     "available_ok_qty"
-    ],
-    "fields": [
-     {
-      "fieldname": "job_order",
-      "fieldtype": "Link",
-      "label": "Job Order",
-      "options": "Job Order"
-     },
-     {
-      "fieldname": "item",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "label": "Finished Item Code",
-      "options": "Item",
-      "reqd": 1
-     },
-     {
-      "fetch_from": "item.item_name",
-      "fieldname": "item_name",
-      "fieldtype": "Data",
-      "in_list_view": 1,
-      "label": "Finished Item Name",
-      "read_only": 1
-     },
-     {
-      "fieldname": "target_warehouse",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "label": "Target Warehouse",
-      "options": "Warehouse",
-      "reqd": 1
-     },
-     {
-      "fieldname": "qty",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "label": "QTY",
-      "precision": "2",
-      "reqd": 1
-     },
-     {
-      "fieldname": "available_ok_qty",
-      "fieldtype": "Data",
-      "in_list_view": 1,
-      "label": "Available OK qty",
-      "read_only": 1
-     },
-     {
-      "fieldname": "production",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "label": "Production ID",
-      "options": "Production",
-      "reqd": 1
-     },
-     {
-      "fieldname": "reference_id",
-      "fieldtype": "Data",
-      "label": "Reference ID",
-      "read_only": 1,
-      "reqd": 1
-     }
-    ],
-    "index_web_pages_for_search": 1,
-    "istable": 1,
-    "links": [],
-    "modified": "2023-12-01 16:13:59.214732",
-    "modified_by": "Administrator",
-    "module": "Ms Production",
-    "name": "Downstream Items Production",
-    "owner": "Administrator",
-    "permissions": [],
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "states": []
-   }
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-12 08:55:15.818344",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "column_break_uvvxs",
+  "item_name",
+  "column_break_wpbh5",
+  "qty",
+  "column_break_cnmku",
+  "target_warehouse",
+  "column_break_0lqdx",
+  "available_ok_qty",
+  "section_break_n4vf7",
+  "production",
+  "column_break_felp0",
+  "reference_id",
+  "column_break_bfdgr",
+  "job_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_order",
+   "fieldtype": "Link",
+   "label": "Job Order",
+   "options": "Job Order"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Finished Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Finished Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity To Process",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "available_ok_qty",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Available OK Quantity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "production",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Production ID",
+   "options": "Production",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_id",
+   "fieldtype": "Data",
+   "label": "Reference ID",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_uvvxs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wpbh5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_cnmku",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_0lqdx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_n4vf7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_felp0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bfdgr",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-12-15 16:08:43.563672",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Downstream Items Production",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

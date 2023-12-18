@@ -16,6 +16,14 @@ class DownstreamProcesses(Document):
 												filters = {"parent": str(d.production)},
 												fields = ["job_order","item","item_name","target_warehouse",'name'])
 			for i in items_doc:
+				avalable_ok_qty = frappe.get_all('Qty Details', 
+									 		filters={'parent':str(d.production) ,"item" :i.item} ,
+											fields=['ok_qty','job_order'], order_by='idx asc',)
+				aval_ok_qty=0
+				for av in avalable_ok_qty:
+					if str(av.job_order) == str(i.job_order):
+						aval_ok_qty=av.ok_qty
+      
 				self.append("items",{
 						'job_order': (i.job_order) ,
 						'production': (d.production),
@@ -23,6 +31,7 @@ class DownstreamProcesses(Document):
 						'item': str(i.item),
 						'item_name': str(i.item_name),
 						'target_warehouse': t__w ,
+						'available_ok_qty': aval_ok_qty,
 					},),
 	
 		# self.method_to_set_raw_item()
@@ -55,7 +64,7 @@ class DownstreamProcesses(Document):
 										'raw_item_name': str(me.item_name),
 										'required_qty':me.qty*i.qty,
 										'standard_qty':me.qty,
-										'source_warehouse': s__w if i.item != me.item else None,
+										'source_warehouse': s__w , #if i.item != me.item else None,
 										'available_qty': self.get_available_quantity(me.item,s__w) if i.item != me.item else 0
 										
 									},),
@@ -86,7 +95,7 @@ class DownstreamProcesses(Document):
 													'raw_item_name': str(y.item_name),
 													'required_qty':y.qty*i.qty,
 													'standard_qty':y.qty,
-													'source_warehouse': s__w if i.item != y.item else None,
+													'source_warehouse': s__w,  #if i.item != y.item else None,
 													'available_qty': self.get_available_quantity(y.item,s__w) if i.item != y.item else 0
 												},),
 								
