@@ -20,6 +20,8 @@
   "mr_warehouse_p",
   "column_break_jnuwm",
   "rw_warehouse_p",
+  "section_break_xovkv",
+  "expense_account_for_wages",
   "downstream_processes_tab",
   "target_warehouse_dp",
   "column_break_doijp",
@@ -159,11 +161,21 @@
    "fieldname": "company_tab",
    "fieldtype": "Tab Break",
    "label": "Company"
+  },
+  {
+   "fieldname": "section_break_xovkv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "expense_account_for_wages",
+   "fieldtype": "Link",
+   "label": "Expense Account For Wages",
+   "options": "Account"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-17 15:05:23.258875",
+ "modified": "2023-12-20 11:08:29.869768",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Machine Shop Setting",

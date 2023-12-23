@@ -80,7 +80,7 @@ class DownstreamProcesses(Document):
 
 
 			else:
-				demo =frappe.get_all('Material Cycle Time', filters={'item':i.item ,'company':self.company,"from_date" :["<",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
+				demo =frappe.get_all('Material Cycle Time', filters={'item':i.item ,'company':self.company,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 				if demo:
 					for t in demo:
 						kaju=frappe.get_all('Raw Item Child', filters={'parent':t.name,'downstream_process': self.downstream_process} ,fields=['item',"item_name","qty"])
@@ -268,6 +268,9 @@ class DownstreamProcesses(Document):
 		total_item_qty=0
 		for item in self.get('items'):
 			total_item_qty= total_item_qty + item.qty
+			if item.available_ok_qty and item.qty:
+				if item.available_ok_qty < item.qty:
+					frappe.throw('You Can not select "Quantity To Process" more than "Available OK Quantity" ')
 	
 		if self.total_qty != total_item_qty:
 			frappe.throw(f'The Total qty is not matched it should be equal to {total_item_qty}')

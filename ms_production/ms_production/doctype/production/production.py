@@ -251,8 +251,10 @@ class Production(Document):
    
 		self.total_earned_minutes = t_total_earned_time
 		self.time_difference = self.required_time - self.total_earned_minutes
+		self.remaining_reasonable_time = self.time_difference
 		self.calculet_self_total_qty()
 		self.validate_ok_qty()
+		self.calculating_time()
 
 	@frappe.whitelist()
 	def calculet_self_total_qty(self):
@@ -438,7 +440,7 @@ class Production(Document):
 			disk =frappe.get_all('Material Cycle Time', filters={'item':d.item ,'company':self.company} ,fields=['name',], order_by='modified desc',limit = 1 )
 			if disk:
 				for dk in disk:
-					param=frappe.get_all('Machine Item', filters={'parent':dk.name} ,fields=['machine','operation'])
+					param=frappe.get_all('Machine Item', filters={'parent':dk.name} ,fields=['operation']) # 'machine'
 					for p in param:
 						final_list.append(p.machine)
 						result_list.append(p.operation)
@@ -607,7 +609,7 @@ class Production(Document):
 				else:
 					frappe.throw("Operation plan is empty for Material Cycle Time: {}".format(material_cycle_name))
 				quality_details_table=self.get("qty_details")
-				for j in range(len(quality_details_table)-1,0,-1):
+				for j in range(len(quality_details_table)-1,-1,-1):
 					if(quality_details_table[j].operation==last_operation):	
 						self.ready_to_downstream=True
 						break
@@ -626,7 +628,19 @@ class Production(Document):
 			for i in material_cycle_obj.get("machine_operation_plan"):
 				opration_list.append(i.operation)
 		return opration_list
-		
+	
+	@frappe.whitelist()
+	def calculating_time(self):
+		downtime_reason_details = self.get("downtime_reason_details")
+		total_time=0
+		if downtime_reason_details:
+			
+			for d in downtime_reason_details :
+				if d.time:
+					total_time = total_time + d.time
+		if self.remaining_reasonable_time and total_time:
+			self.remaining_reasonable_time = self.remaining_reasonable_time - total_time
+
     
 		
 

@@ -1303,5 +1303,14 @@ frappe.ui.form.on('Production', {
     }
 });
 
-
+frappe.ui.form.on('Downtime Reason Details', {
+	time(frm,cdt,cdn) {
+		frm.call({
+			method:'calculating_time',
+			doc:frm.doc,
+		})
+	},
+	
+	
+});
 
