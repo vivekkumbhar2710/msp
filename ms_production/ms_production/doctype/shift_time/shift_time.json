@@ -1,7 +1,7 @@
 {
     "actions": [],
     "allow_rename": 1,
-    "autoname": "format:{hours} Hours {shift} shift ",
+    "autoname": "format:(name_of_shift)",
     "creation": "2023-07-29 18:47:20.139254",
     "default_view": "List",
     "doctype": "DocType",
@@ -9,6 +9,7 @@
     "engine": "InnoDB",
     "field_order": [
      "compnay",
+     "name_of_shift",
      "hours",
      "minutes",
      "shift"
@@ -28,18 +29,25 @@
       "fieldname": "shift",
       "fieldtype": "Select",
       "label": "Shift",
-      "options": "1\n2\n3\n4\n5\n6"
+      "options": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20"
      },
      {
       "fieldname": "compnay",
       "fieldtype": "Link",
       "label": "Compnay",
       "options": "Company"
+     },
+     {
+      "fieldname": "name_of_shift",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Name Of Shift",
+      "reqd": 1
      }
     ],
     "index_web_pages_for_search": 1,
     "links": [],
-    "modified": "2023-12-18 13:22:20.825679",
+    "modified": "2023-12-29 16:54:10.433384",
     "modified_by": "Administrator",
     "module": "Ms Production",
     "name": "Shift Time",

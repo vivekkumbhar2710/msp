@@ -114,7 +114,7 @@ class Production(Document):
 
 			additional_costs.append(
 				{
-                "expense_account": self.expense_account_for_wages,
+                "expense_account": 'Sales Expenses - AFPL',
                 "description":  "Operation Cost",
                 "amount": wedges_for_item,
 
@@ -182,7 +182,9 @@ class Production(Document):
 					self.append("qty_details",{
 						'operation': itemOperations[ind].operation,
 						'cycle_time':  itemOperations[ind].cycle_time,
-						'item': itemOperations[ind].item
+						'item': itemOperations[ind].item,
+						'machine': itemOperations[index-1].machine,
+
 					},)
 				else:
 					self.append("qty_details",qty_items[ind])
@@ -190,7 +192,8 @@ class Production(Document):
 				self.append("qty_details",{
 					'operation': itemOperations[index-1].operation,
 					'cycle_time':  itemOperations[index-1].cycle_time,
-					'item': itemOperations[index-1].item
+					'item': itemOperations[index-1].item,
+					'machine': itemOperations[index-1].machine,
 				},),
 
 	@frappe.whitelist()
@@ -445,7 +448,7 @@ class Production(Document):
 						final_list.append(p.machine)
 						result_list.append(p.operation)
 			elif d.item:
-				frappe.msgprint(f'There is no item {d.item} prent in "Material Cycle Time"')
+				frappe.throw(f'There is no item {d.item} prent in "Material Cycle Time"')
 			break
 		return final_list,result_list
 
@@ -461,7 +464,7 @@ class Production(Document):
 	def set_cycle_time(self):
 		for v in self.get('item_operations'):
 			v.cycle_time=0
-			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
+			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.posting_date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 			if demo:
 				for t in demo:
 					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time'])
@@ -517,7 +520,7 @@ class Production(Document):
 		total_weges =0
 		cor = frappe.get_all("Wages Master",filters = {"Employee": self.operator},fields = ["name"])
 		if cor:
-			cos = frappe.get_all("Child Wages Master",filters = {"parent": cor[0].name ,"from_date": ['<=',self.date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
+			cos = frappe.get_all("Child Wages Master",filters = {"parent": cor[0].name ,"from_date": ['<=',self.posting_date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
 			if cos:
 				weges_per_min_of_op = (cos[0].wages_per_hour)/60
 

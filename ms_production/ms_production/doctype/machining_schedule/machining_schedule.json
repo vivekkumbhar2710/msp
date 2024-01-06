@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{item_group}-{month}-{year}",
+ "creation": "2024-01-05 10:33:50.842943",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "refresh_button",
+  "column_break_f8klp",
+  "month",
+  "column_break_fqwry",
+  "year",
+  "column_break_ecarp",
+  "item_group",
+  "section_break_riqzb",
+  "machining_schedule_details",
+  "item_machining_schedule",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_f8klp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month",
+   "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+  },
+  {
+   "fieldname": "column_break_fqwry",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Select",
+   "label": "Year",
+   "options": "2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030"
+  },
+  {
+   "fieldname": "column_break_ecarp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Group",
+   "options": "Item Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_riqzb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item_machining_schedule",
+   "fieldtype": "Table",
+   "label": "Item Machining Schedule",
+   "options": "Item Machining Schedule"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Machining Schedule",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "machining_schedule_details",
+   "fieldtype": "Table",
+   "label": "Machining Schedule Details",
+   "options": "Machining Schedule Details"
+  },
+  {
+   "fieldname": "refresh_button",
+   "fieldtype": "Button",
+   "label": "\ud83d\udd01"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-01-05 16:21:57.203888",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machining Schedule",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

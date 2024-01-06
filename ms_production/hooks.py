@@ -222,8 +222,8 @@ fixtures = [
     {
         "doctype": "Client Script",
         "filters": [
-            ["name", "in", ["Filter-Proudction","Filter-Material Cycle Time","Filter-Downstream Processes"]],
+            ["name", "in", ["Filter-Proudction","Filter-Material Cycle Time","Filter-Downstream Processes","Filter-Other Machine Shop"]],
         ]
     },
-    "Rejection Type"
+
 ]

@@ -12,6 +12,7 @@
   "workstation",
   "column_break_b6qly",
   "company",
+  "machine_type",
   "section_break_i9xwe",
   "machine_operations"
  ],
@@ -19,7 +20,9 @@
   {
    "fieldname": "machine_name",
    "fieldtype": "Data",
-   "label": "Machine Name"
+   "in_list_view": 1,
+   "label": "Machine Name",
+   "reqd": 1
   },
   {
    "fieldname": "workstation",
@@ -40,17 +43,27 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_i9xwe",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "machine_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Machine Type",
+   "options": "Machine Type",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-15 10:26:08.796816",
+ "modified": "2024-01-05 16:24:37.023724",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Machine",

@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-02 13:23:51.328122",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "oee_report_tab",
+  "company",
+  "section_break_lpqsz",
+  "total_working_days_in_month",
+  "planned__downtime_per_day",
+  "column_break_czgje",
+  "available_time_per_day",
+  "total_available_hours_per_day"
+ ],
+ "fields": [
+  {
+   "fieldname": "oee_report_tab",
+   "fieldtype": "Tab Break",
+   "label": "OEE Report"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_lpqsz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_working_days_in_month",
+   "fieldtype": "Float",
+   "label": "Total Working Days (In Month)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "planned__downtime_per_day",
+   "fieldtype": "Float",
+   "label": "Planned  Downtime Hours (Per Day)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_czgje",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "available_time_per_day",
+   "fieldtype": "Float",
+   "label": "Available Time Hours (Per Day)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "default": "24",
+   "fieldname": "total_available_hours_per_day",
+   "fieldtype": "Float",
+   "label": "Total Available Hours (Per Day)",
+   "precision": "2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-01-03 11:54:35.030189",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Report Prerequisites",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

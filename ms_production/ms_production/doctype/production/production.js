@@ -31,7 +31,7 @@ frappe.ui.form.on('Item operations', {
         let table_index = table.grid_rows.findIndex(row => row.doc === d);
         frappe.call({
             method: "get_operation_for_item",
-            args: {
+            args:{
                 table_index: table_index
             },
             doc: frm.doc,

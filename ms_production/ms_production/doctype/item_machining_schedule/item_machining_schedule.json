@@ -1,0 +1,191 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-05 11:41:17.175711",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "column_break_ow0ft",
+  "item_name",
+  "column_break_xersm",
+  "opening_stock",
+  "column_break_hh9zy",
+  "schedule_quantity",
+  "section_break_1qebw",
+  "vtl",
+  "column_break_z204x",
+  "vtl_time_in_min",
+  "section_break_5rnid",
+  "cnc",
+  "column_break_ptkga",
+  "cnc_time_in_min",
+  "section_break_pwdei",
+  "vmc",
+  "column_break_d2d5s",
+  "vmc_time_in_min",
+  "section_break_udey4",
+  "sgm",
+  "column_break_il28y",
+  "sgm_time_in_min"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ow0ft",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xersm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "schedule_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Schedule Quantity"
+  },
+  {
+   "columns": 1,
+   "fieldname": "opening_stock",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Opening Stock",
+   "precision": "3",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hh9zy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_1qebw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "vtl",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "VTL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_z204x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "vtl_time_in_min",
+   "fieldtype": "Float",
+   "label": "VTL time in Min",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_5rnid",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "cnc",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "CNC",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ptkga",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "cnc_time_in_min",
+   "fieldtype": "Float",
+   "label": "CNC time in Min",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_pwdei",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "vmc",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "VMC",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_d2d5s",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "vmc_time_in_min",
+   "fieldtype": "Float",
+   "label": "VMC time in Min",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_udey4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "sgm",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "SGM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_il28y",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "sgm_time_in_min",
+   "fieldtype": "Float",
+   "label": "SGM time in Min",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-01-06 10:49:37.109985",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Item Machining Schedule",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
