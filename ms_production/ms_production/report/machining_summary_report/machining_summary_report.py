@@ -2,6 +2,8 @@
 # For license information, please see license.txt
 
 import frappe
+import calendar
+from datetime import datetime
 
 def execute(filters=None):
 	if not filters: filters={}
@@ -29,6 +31,31 @@ def get_columns():
 			"fieldtype": "data",
 			"label": "Item_name",
 		},
+					{
+						"fieldname": "opening_stock",
+						"fieldtype": "float",
+						"label": "Opening Stock",
+					},
+					{
+						"fieldname": "delivery_qty",
+						"fieldtype": "float",
+						"label": "Delivered QTY",
+					},
+					{
+						"fieldname": "sales_qty",
+						"fieldtype": "float",
+						"label": "Sales Qty",
+					},
+					{
+						"fieldname": "scheduled_qty",
+						"fieldtype": "float",
+						"label": "Scheduled Qty",
+					},
+					{
+						"fieldname": "scheduled_percentage",
+						"fieldtype": "float",
+						"label": "% Copmiance with Sch",
+					},
 		{
 			"fieldname": "ok_qty",
 			"fieldtype": "float",
@@ -74,6 +101,7 @@ def get_columns():
 			"fieldtype": "float",
 			"label": "Total Quantity",
 		},
+
 	]
 
 
@@ -105,14 +133,25 @@ def get_data(filters):
 			mr_qty = mr_qty + j.mr_qty
 			rw_qty = rw_qty + j.rw_qty
 		total_qty = ok_qty + cr_qty + mr_qty + rw_qty
-		cr_per = (cr_qty / total_qty) * 100
-		mr_per = (mr_qty / total_qty) * 100
-		rw_per = (rw_qty / total_qty) * 100
+		if total_qty != 0:
+			cr_per = (cr_qty / total_qty) * 100
+			mr_per = (mr_qty / total_qty) * 100
+			rw_per = (rw_qty / total_qty) * 100
 
 		total_rejection = cr_qty + mr_qty + rw_qty
+		delivery_qty = get_delivery_qty(i,filters)
+		scheduled_qty = get_scheduled_qty(i,filters)
+		sales_qty = get_sales_qty(i,filters)
+		if scheduled_qty:
+			scheduled_percentage = round((delivery_qty/scheduled_qty)*100 , 2)
 		item_dict ={
 					'item_code':i,
 					'item_name': frappe.get_value('Item', i ,'item_name'),
+					'opening_stock': get_all_available_quantity(i),
+					'delivery_qty': delivery_qty,
+					'scheduled_qty': scheduled_qty,
+					'sales_qty':sales_qty,
+					'scheduled_percentage':scheduled_percentage,
 					'ok_qty': ok_qty ,
 					'cr_qty': cr_qty,
 					'mr_qty': mr_qty ,
@@ -121,7 +160,7 @@ def get_data(filters):
 					'mr_per': round(mr_per,2) ,
 					'rw_per': round(rw_per,2) ,
 					'total_rejection':total_rejection ,
-					'total_qty': total_qty, }
+					'total_qty': total_qty,}
 		
 		result_list.append(item_dict)
 
@@ -134,8 +173,7 @@ def get_conditions(filters):
 	company_filter = {}
 	item_code_filter = {}
 
-	from_date = filters.get('from_date')
-	to_date =  filters.get('to_date')
+	from_date ,to_date= get_month_dates(int(filters.get('year')), filters.get('month'))
 	company = filters.get('company')
 	item_code =  filters.get('item_code')
 
@@ -170,3 +208,45 @@ def get_item_list(parent_filter):
 
 	return return_list
 
+
+def get_all_available_quantity(item_code):
+	result = frappe.get_all("Bin", filters={"item_code": item_code,}, fields=["actual_qty"])
+	return sum(r.actual_qty for r in result) if result else 0
+
+def get_delivery_qty(item_code ,filters):
+	from_date ,to_date= get_month_dates(int(filters.get('year')), filters.get('month'))
+	qty = frappe.db.sql("""
+							SELECT b.item_code, SUM(b.qty) 'qty' 
+							FROM `tabDelivery Note` a
+							LEFT JOIN `tabDelivery Note Item` b ON a.name = b.parent
+							WHERE a.posting_date BETWEEN %s AND %s AND b.item_code = %s AND b.docstatus = 1
+						""",(from_date ,to_date ,item_code),as_dict="True")
+
+	return qty[0].qty if qty[0].qty else 0
+
+def get_sales_qty(item_code ,filters):
+	from_date ,to_date= get_month_dates(int(filters.get('year')), filters.get('month'))
+	qty = frappe.db.sql("""
+							SELECT b.item_code, SUM(b.qty) 'qty' 
+							FROM `tabSales Invoice` a
+							LEFT JOIN `tabSales Invoice Item` b ON a.name = b.parent
+							WHERE a.posting_date BETWEEN %s AND %s AND b.item_code = %s AND b.docstatus = 1
+						""",(from_date ,to_date ,item_code),as_dict="True")
+
+	return qty[0].qty if qty[0].qty else 0
+
+def get_month_dates(year, month_name):
+		month_number = datetime.strptime(month_name, "%B").month
+		_, last_day = calendar.monthrange(year, month_number)
+
+		start_date = datetime(year, month_number, 1)
+		end_date = datetime(year, month_number, last_day)
+
+		return start_date, end_date
+
+def get_scheduled_qty(item_code,filters):
+	machining_schedule =  frappe.get_value("Machining Schedule",{'company':filters.get('company'),'month':filters.get('month'),'year':filters.get('year')},"name")
+	if machining_schedule:
+		qty =  frappe.get_value("Item Machining Schedule",{'parent':machining_schedule,'item_code':item_code},"schedule_quantity")
+		return qty if qty else 0
+	return 0

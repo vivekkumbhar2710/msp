@@ -8,8 +8,10 @@
  "field_order": [
   "job_order",
   "operation",
+  "operation_name",
   "rejection_reason",
   "finished_item",
+  "finished_item_name",
   "rejection_type",
   "qty",
   "target_warehouse"
@@ -65,11 +67,23 @@
    "fieldtype": "Link",
    "label": "Operation",
    "options": "Operation Master"
+  },
+  {
+   "fetch_from": "operation.operation",
+   "fieldname": "operation_name",
+   "fieldtype": "Data",
+   "label": "Operation Name"
+  },
+  {
+   "fetch_from": "finished_item.item_name",
+   "fieldname": "finished_item_name",
+   "fieldtype": "Data",
+   "label": "Finished Item Name"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-10-18 16:36:04.831988",
+ "modified": "2024-01-08 12:09:35.642286",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Item Rejection Reason",

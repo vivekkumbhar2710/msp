@@ -10,24 +10,24 @@ frappe.query_reports["Machining Summary Report"] = {
 			"fieldtype": "Link",
 			"label": "Company",
 			"options": "Company",
+			'reqd':1,
 			
 		},
 		{
-			"fieldname": "from_date",
-			"fieldtype": "Date",
-			"label": " From Date",
+			"fieldname": "month",
+			"fieldtype": "Select",
+			"label": "Month",
+			"options": ["January","February","March","April","May","June","July","August","September","October","November","December"],
 			'reqd':1,
-			'default': frappe.datetime.add_months(frappe.datetime.get_today(), -1)
-			
-			
+			'default': 'December',
 		},
 		{
-			"fieldname": "to_date",
-			"fieldtype": "Date",
-			"label": " To Date",
+			"fieldname": "year",
+			"fieldtype": "Select",
+			"label": "Year",
 			'reqd':1,
-			'default':frappe.datetime.get_today(),
-			
+			"options": [2023,2024,2025,2026,2027],
+
 		},
 		{
 			"fieldname": "item_code",
