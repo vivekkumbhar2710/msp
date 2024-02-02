@@ -3,8 +3,6 @@
 
 import frappe
 from datetime import datetime,timedelta
-
-
 def execute(filters=None):
 	if not filters: filters={}
 	columns, data =[],[]
@@ -83,7 +81,7 @@ def get_data(filters):
   
 	filter_dict2["docstatus"]=1
 	if from_date or to_date:
-		filter_dict2["posting_date"]=['between',[from_date ,to_date]]
+		filter_dict2["date"]=['between',[from_date ,to_date]]
   
 	total_days=0
 	if to_date and from_date:

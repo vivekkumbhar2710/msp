@@ -448,7 +448,7 @@ class Production(Document):
 						final_list.append(p.machine)
 						result_list.append(p.operation)
 			elif d.item:
-				frappe.throw(f'There is no item {d.item} prent in "Material Cycle Time"')
+				frappe.throw(f'There is no item {d.item} present in "Material Cycle Time"')
 			break
 		return final_list,result_list
 
@@ -464,7 +464,7 @@ class Production(Document):
 	def set_cycle_time(self):
 		for v in self.get('item_operations'):
 			v.cycle_time=0
-			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.posting_date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
+			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 			if demo:
 				for t in demo:
 					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time'])
@@ -520,7 +520,7 @@ class Production(Document):
 		total_weges =0
 		cor = frappe.get_all("Wages Master",filters = {"Employee": self.operator},fields = ["name"])
 		if cor:
-			cos = frappe.get_all("Child Wages Master",filters = {"parent": cor[0].name ,"from_date": ['<=',self.posting_date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
+			cos = frappe.get_all("Child Wages Master",filters = {"parent": cor[0].name ,"from_date": ['<=',self.date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
 			if cos:
 				weges_per_min_of_op = (cos[0].wages_per_hour)/60
 
@@ -645,5 +645,17 @@ class Production(Document):
 			self.remaining_reasonable_time = self.remaining_reasonable_time - total_time
 
     
-		
+	@frappe.whitelist()
+	def get_machine(self,index):
+		machine_id_li=[]
+		for i in self.get("qty_details"):
+			if i.machine not in machine_id_li:
+				machine_id_li.append(i.machine)
+		if(len(set(machine_id_li))==1):
+			self.get("downtime_reason_details")[index-1].machine=machine_id_li[0]
+		return machine_id_li
 
+	@frappe.whitelist()
+	def check_machines(self):
+		pass
+	

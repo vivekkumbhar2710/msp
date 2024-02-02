@@ -11,6 +11,22 @@ frappe.ui.form.on('Downstream Processes', {
 frappe.ui.form.on('Downstream Processes', {
     refresh: function(frm) {
         $('.layout-side-section').hide();
+        if (frm.doc.without_production_entry == 1) {
+            frm.doc.items.forEach(child => {
+                // Assuming available_ok_qty is the fieldname you want to make mandatory/optional
+                frm.fields_dict['items'].grid.toggle_reqd('production', 0, child.name);
+                frm.fields_dict['raw_items'].grid.toggle_reqd('production', 0, child.name);
+                frm.fields_dict['qty_details'].grid.toggle_reqd('production', 0, child.name);
+            });
+        };
+        
+        if (frm.doc.without_production_entry == 0) {
+            frm.doc.items.forEach(child => {
+                // Assuming available_ok_qty is the fieldname you want to make mandatory/optional
+                frm.fields_dict['items'].grid.toggle_reqd('production', 1, child.name);
+                frm.fields_dict['raw_items'].grid.toggle_reqd('production', 1, child.name);
+                frm.fields_dict['qty_details'].grid.toggle_reqd('production', 1, child.name);        });
+        }
     }
 });
 
@@ -25,6 +41,59 @@ frappe.ui.form.on('Downstream Processes', {
     }
 });
 
+// frappe.ui.form.on("Downstream Processes", {
+//     without_production_entry: function(frm) {
+//         frappe.msgprint("hi.....!")
+//         // Make reference_id mandatory for existing child items if is_process is checked
+//         frm.doc.items.forEach(child => {
+//             if (frm.doc.without_production_entry == 1) {
+//                 frm.set_df_property("items", "item", child.name, 0); // Make mandatory
+//                 frm.refresh_field("items");
+//             } else {
+//                 frm.set_df_property("items", "item", child.name, 0); // Make optional
+//             }
+//         });
+//     },
+    
+// });
+
+frappe.ui.form.on("Downstream Processes", {
+    without_production_entry: function(frm) {
+        if (frm.doc.without_production_entry == 1) {
+        frm.doc.items.forEach(child => {
+            frm.fields_dict['items'].grid.toggle_reqd('production', 0, child.name);
+            frm.fields_dict['raw_items'].grid.toggle_reqd('production', 0, child.name);
+            frm.fields_dict['qty_details'].grid.toggle_reqd('production', 0, child.name);
+        });
+    };
+    
+    if (frm.doc.without_production_entry == 0) {
+        frm.doc.items.forEach(child => {
+            frm.fields_dict['items'].grid.toggle_reqd('production', 1, child.name);
+            frm.fields_dict['raw_items'].grid.toggle_reqd('production', 1, child.name);
+            frm.fields_dict['qty_details'].grid.toggle_reqd('production', 1, child.name);        });
+    };
+    }
+});
+
+// frappe.ui.form.on("Downstream Processes", {
+//     without_production_entry: function(frm) {
+//         const isWithoutProductionEntry = frm.doc.without_production_entry == 0;
+
+//         frm.doc.items.forEach(child => {
+//             // Assuming 'production' and 'reference_id' are the fieldnames to be modified raw_items qty_details
+//             frm.fields_dict['items'].grid.toggle_reqd('production', isWithoutProductionEntry ? 0 : 1, child.name);
+//             // frm.fields_dict['items'].grid.toggle_reqd('reference_id', isWithoutProductionEntry ? 0 : 1, child.name);
+//             frm.fields_dict['raw_items'].grid.toggle_reqd('production', isWithoutProductionEntry ? 0 : 1, child.name);
+//             // frm.fields_dict['raw_items'].grid.toggle_reqd('reference_id', isWithoutProductionEntry ? 0 : 1, child.name);
+//             frm.fields_dict['qty_details'].grid.toggle_reqd('production', isWithoutProductionEntry ? 0 : 1, child.name);
+
+//         });
+//     }
+// });
+
+
+  
 
 //abc
 // ============================================================= Downstream Processes =================================================
@@ -198,7 +267,16 @@ frappe.ui.form.on('Downstream Items Production', {
         frm.call({
 			method:'set_warehouse_if_not',
 			doc:frm.doc,
-		})
+		});
+        if (frm.doc.without_production_entry == 1) {
+
+        frm.clear_table("raw_items"),
+        frm.clear_table("qty_details"),   
+        frm.call({
+			method:'method_to_without_production_entry',
+			doc:frm.doc,
+		});
+    }
     }
 });
 

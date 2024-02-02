@@ -1,0 +1,33 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-01-18 15:36:11.684030",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Header Footer",
+ "modified": "2024-01-18 15:36:11.684030",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machine Shop OEE",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Production",
+ "report_name": "Machine Shop OEE",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Machine Operator"
+  }
+ ]
+}

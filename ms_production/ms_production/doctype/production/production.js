@@ -1,6 +1,7 @@
 // // Copyright (c) 2023, Abhishek Chougule and contributors
 // // For license information, please see license.txt
 
+
 frappe.ui.form.on('Items Production', { 
 	item: function(frm) {
 			frappe.call({
@@ -23,6 +24,8 @@ frappe.ui.form.on('Items Production', {
 			
 		}
 	});
+
+
 
 frappe.ui.form.on('Item operations', {
     machine: function (frm, cdt, cdn) {
@@ -54,9 +57,44 @@ frappe.ui.form.on('Item operations', {
 });
 
 
+frappe.ui.form.on('Downtime Reason Details', {
+	reason: function(frm,cdt, cdn) {
+		let d = locals[cdt][cdn];
+		frm.call({
+			method:'get_machine',
+			doc:frm.doc,
+			args: {
+			index: d.idx,
+			},
+		})
+	}
+}); 
 
 
-
+// frappe.ui.form.on('Downtime Reason Details', {
+//     reason: function(frm, cdt, cdn) {
+//         let d = locals[cdt][cdn];
+//         frappe.call({
+//             method: "get_machine",
+//             doc: frm.doc,
+//             args: {
+//                 index: d.idx,
+//             },
+//             callback: function(response) {
+//                 if (!response.exc) {
+//                     frm.set_query("machine", function(doc, cdt, cdn) {
+//                         let d = locals[cdt][cdn];
+//                         return {
+//                             filters: [
+//                                 ['Machine', 'name', 'in', response.message],
+//                             ]
+//                         };
+//                     });
+//                 }
+//             }
+//         });
+//     },
+// });
 
 
 

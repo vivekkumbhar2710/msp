@@ -4,7 +4,26 @@
 import frappe
 from frappe.model.document import Document
 
+
+def getVal(val):
+    return val if val is not None else 0
+
 class DownstreamProcesses(Document):
+
+	@frappe.whitelist()
+	def method_to_without_production_entry(self):
+		
+		if self.without_production_entry:
+			items = self.get("items")
+			tw =frappe.get_value("Machine Shop Setting",self.company,"target_warehouse_dp")
+			# frappe.msgprint("hiiii.....")
+			if items:
+				for i in items:
+					if i.item :
+						i.reference_id = str(i.item)
+				self.method_to_set_raw_item()
+
+
 	@frappe.whitelist()
 	def method_to_set_data_in_table (self):
 		if (self.production) and (not self.downstream_process):
@@ -53,7 +72,7 @@ class DownstreamProcesses(Document):
 			if i.job_order:
 				tera = frappe.get_all('Raw Item Child', filters={'parent':(frappe.get_value("Production Schedule",(frappe.get_value("Job Order",(i.job_order),"production_schedule")),"material_cycle_time")),'downstream_process': self.downstream_process} ,fields=['item',"item_name","qty"])
 				for me in tera:
-
+					
 					self.append("raw_items",{
 										'job_order': i.job_order,
 										'production':i.production,
@@ -62,10 +81,10 @@ class DownstreamProcesses(Document):
 										'item_name': str(i.item_name),
 										'raw_item': me.item,
 										'raw_item_name': str(me.item_name),
-										'required_qty':me.qty*i.qty,
+										'required_qty':me.qty*i.qty if i.qty != None else 0,
 										'standard_qty':me.qty,
 										'source_warehouse': s__w , #if i.item != me.item else None,
-										'available_qty': self.get_available_quantity(me.item,s__w) if i.item != me.item else 0
+										'available_qty': self.get_available_quantity(me.item,s__w) if i.item == me.item else 0
 										
 									},),
 
@@ -86,6 +105,7 @@ class DownstreamProcesses(Document):
 						kaju=frappe.get_all('Raw Item Child', filters={'parent':t.name,'downstream_process': self.downstream_process} ,fields=['item',"item_name","qty"])
 						if kaju:
 							for y in kaju:
+								# frappe.msgprint(str(i.item)+str(y.item))
 								self.append("raw_items",{
 													'production':i.production,
 													'reference_id':i.reference_id,
@@ -93,10 +113,10 @@ class DownstreamProcesses(Document):
 													'item_name': str(i.item_name),
 													'raw_item': y.item,
 													'raw_item_name': str(y.item_name),
-													'required_qty':y.qty*i.qty,
+													'required_qty':y.qty*i.qty if i.qty != None else 0,
 													'standard_qty':y.qty,
 													'source_warehouse': s__w,  #if i.item != y.item else None,
-													'available_qty': self.get_available_quantity(y.item,s__w) if i.item != y.item else 0
+													'available_qty': self.get_available_quantity(y.item,s__w) if i.item == y.item else 0
 												},),
 								
 				self.append("qty_details",{
@@ -109,11 +129,12 @@ class DownstreamProcesses(Document):
 					},),
 
 
+	
 	@frappe.whitelist()
 	def calculate_total_qty(self):
 		total_quantity = 0
 		for g in self.get("qty_details"):
-			g.total_qty = g.ok_qty + g.cr_qty + g.mr_qty + g.rw_qty
+			g.total_qty = getVal(g.ok_qty) + getVal(g.cr_qty) + getVal(g.mr_qty) + getVal(g.rw_qty)
 			total_quantity = total_quantity+ g.total_qty
 
 		self.total_qty = total_quantity
@@ -169,7 +190,8 @@ class DownstreamProcesses(Document):
 
 	@frappe.whitelist()
 	def manifacturing_stock_entry(self):
-		for p in self.get("items"):      
+		for p in self.get("items"):
+			temp = 0      
 			se = frappe.new_doc("Stock Entry")
 			se.stock_entry_type = "Manufacture"
 			se.company = self.company
@@ -177,8 +199,9 @@ class DownstreamProcesses(Document):
 			peacock = len(self.get("raw_items"))
 			for g in self.get("raw_items" ,filters = {"reference_id": p.reference_id , }):  # filters = {"": , "": }
 				if (str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item == g.raw_item ):
-					for b in self.get("qty_details",filters = {"reference_id": p.reference_id , }):
+					for b in self.get("qty_details",filters = {"reference_id": p.reference_id , 'ok_qty':['<',0 ]}):
 						if  (str(p.job_order) == str(b.job_order)) and (p.item == b.item):
+							temp = 1
 							se.append(
 									"items",
 									{
@@ -196,7 +219,7 @@ class DownstreamProcesses(Document):
 							},)
 
 				elif(str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item != g.raw_item):
-					for v in self.get("qty_details"):
+					for v in self.get("qty_details" , filters= {'ok_qty':['<',0 ]}):
 						if (str(p.job_order) == str(v.job_order)) and (p.item == v.item):
 							se.append(
 									"items",
@@ -208,10 +231,11 @@ class DownstreamProcesses(Document):
 					
 				elif g==peacock:
 					frappe.throw(f'There is Row Item {g.item} present in "Raw Items" table')
-			se.downstream_process = self.name	
-			se.insert()
-			se.save()
-			se.submit()
+			se.downstream_process = self.name
+			if temp != 0:	
+				se.insert()
+				se.save()
+				se.submit()
 
 
 	@frappe.whitelist()
@@ -224,7 +248,7 @@ class DownstreamProcesses(Document):
 			for p in self.get("items"):
 				for g in self.get("raw_items" ,filters = {"reference_id": p.reference_id , }):
 					if (str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item == g.raw_item ):
-						for b in self.get("rejected_items_reasons",filters = {"reference_id": p.reference_id , }):
+						for b in self.get("rejected_items_reasons"):
 							if  (str(p.job_order) == str(b.job_order)) and (p.item == b.finished_item):
 								se.append(
 										"items",

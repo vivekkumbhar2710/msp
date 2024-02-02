@@ -10,10 +10,6 @@
    "width": "Half"
   },
   {
-   "chart": "Production Analysis",
-   "width": "Half"
-  },
-  {
    "chart": "Production Wages",
    "width": "Half"
   },
@@ -24,6 +20,10 @@
   {
    "chart": "Downstream Processs Employee",
    "width": "Half"
+  },
+  {
+   "chart": "Total Quantity",
+   "width": "Half"
   }
  ],
  "creation": "2023-10-19 12:08:22.605757",
@@ -33,8 +33,8 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2023-11-29 12:42:56.246852",
- "modified_by": "Administrator",
+ "modified": "2024-01-30 18:06:34.260274",
+ "modified_by": "akshay.m@erpdata.in",
  "module": "Ms Production",
  "name": "Machineshop",
  "owner": "Administrator"

@@ -1,162 +1,161 @@
 {
- "actions": [],
- "allow_rename": 1,
- "creation": "2023-10-12 08:56:01.079183",
- "default_view": "List",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "item",
-  "column_break_uc21x",
-  "item_name",
-  "column_break_xkazd",
-  "raw_item",
-  "column_break_cgbao",
-  "raw_item_name",
-  "column_break_183sx",
-  "source_warehouse",
-  "section_break_ezpzl",
-  "available_qty",
-  "column_break_bt75h",
-  "required_qty",
-  "column_break_lyaug",
-  "standard_qty",
-  "section_break_fzrgh",
-  "production",
-  "column_break_fwmdl",
-  "job_order",
-  "column_break_dwbtn",
-  "reference_id"
- ],
- "fields": [
-  {
-   "fieldname": "job_order",
-   "fieldtype": "Link",
-   "label": "Job Order",
-   "options": "Job Order"
-  },
-  {
-   "fieldname": "item",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Finished Item Code",
-   "options": "Item",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "item.item_name",
-   "fieldname": "item_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Finished Item Name"
-  },
-  {
-   "fieldname": "raw_item",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Raw Item Code",
-   "options": "Item",
-   "reqd": 1
-  },
-  {
-   "fieldname": "raw_item_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Raw Item Name"
-  },
-  {
-   "fieldname": "source_warehouse",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Source Warehouse",
-   "options": "Warehouse",
-   "reqd": 1
-  },
-  {
-   "fieldname": "available_qty",
-   "fieldtype": "Int",
-   "label": "Available Quantity",
-   "read_only": 1
-  },
-  {
-   "fieldname": "required_qty",
-   "fieldtype": "Float",
-   "label": "Required Quantity",
-   "precision": "2"
-  },
-  {
-   "fieldname": "standard_qty",
-   "fieldtype": "Float",
-   "label": "Standard Quantity",
-   "precision": "2"
-  },
-  {
-   "fieldname": "production",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Production ID",
-   "options": "Production",
-   "reqd": 1
-  },
-  {
-   "fieldname": "reference_id",
-   "fieldtype": "Data",
-   "label": "Reference ID",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_uc21x",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_cgbao",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_183sx",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_ezpzl",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_bt75h",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_lyaug",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_fzrgh",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_fwmdl",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_dwbtn",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_xkazd",
-   "fieldtype": "Column Break"
-  }
- ],
- "index_web_pages_for_search": 1,
- "istable": 1,
- "links": [],
- "modified": "2023-12-15 16:13:08.293370",
- "modified_by": "Administrator",
- "module": "Ms Production",
- "name": "Downstream Raw Items Production",
- "owner": "Administrator",
- "permissions": [],
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
-}
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2023-10-12 08:56:01.079183",
+    "default_view": "List",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+     "item",
+     "column_break_uc21x",
+     "item_name",
+     "column_break_xkazd",
+     "raw_item",
+     "column_break_cgbao",
+     "raw_item_name",
+     "column_break_183sx",
+     "source_warehouse",
+     "section_break_ezpzl",
+     "available_qty",
+     "column_break_bt75h",
+     "required_qty",
+     "column_break_lyaug",
+     "standard_qty",
+     "section_break_fzrgh",
+     "production",
+     "column_break_fwmdl",
+     "job_order",
+     "column_break_dwbtn",
+     "reference_id"
+    ],
+    "fields": [
+     {
+      "fieldname": "job_order",
+      "fieldtype": "Link",
+      "label": "Job Order",
+      "options": "Job Order"
+     },
+     {
+      "fieldname": "item",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Finished Item Code",
+      "options": "Item",
+      "reqd": 1
+     },
+     {
+      "fetch_from": "item.item_name",
+      "fieldname": "item_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Finished Item Name"
+     },
+     {
+      "fieldname": "raw_item",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Raw Item Code",
+      "options": "Item",
+      "reqd": 1
+     },
+     {
+      "fieldname": "raw_item_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Raw Item Name"
+     },
+     {
+      "fieldname": "source_warehouse",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Source Warehouse",
+      "options": "Warehouse",
+      "reqd": 1
+     },
+     {
+      "fieldname": "available_qty",
+      "fieldtype": "Int",
+      "label": "Available Quantity",
+      "read_only": 1
+     },
+     {
+      "fieldname": "required_qty",
+      "fieldtype": "Float",
+      "label": "Required Quantity",
+      "precision": "2"
+     },
+     {
+      "fieldname": "standard_qty",
+      "fieldtype": "Float",
+      "label": "Standard Quantity",
+      "precision": "2"
+     },
+     {
+      "fieldname": "production",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Production ID",
+      "options": "Production"
+     },
+     {
+      "fieldname": "reference_id",
+      "fieldtype": "Data",
+      "label": "Reference ID",
+      "read_only": 1,
+      "reqd": 1
+     },
+     {
+      "fieldname": "column_break_uc21x",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "column_break_cgbao",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "column_break_183sx",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "section_break_ezpzl",
+      "fieldtype": "Section Break"
+     },
+     {
+      "fieldname": "column_break_bt75h",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "column_break_lyaug",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "section_break_fzrgh",
+      "fieldtype": "Section Break"
+     },
+     {
+      "fieldname": "column_break_fwmdl",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "column_break_dwbtn",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "column_break_xkazd",
+      "fieldtype": "Column Break"
+     }
+    ],
+    "index_web_pages_for_search": 1,
+    "istable": 1,
+    "links": [],
+    "modified": "2024-01-21 23:40:51.787222",
+    "modified_by": "Administrator",
+    "module": "Ms Production",
+    "name": "Downstream Raw Items Production",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+   }
