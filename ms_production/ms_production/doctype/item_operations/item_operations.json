@@ -14,7 +14,8 @@
   "cycle_time",
   "column_break_h1zqt",
   "finished_item_name",
-  "operation_name"
+  "operation_name",
+  "boring"
  ],
  "fields": [
   {
@@ -75,12 +76,17 @@
    "fieldname": "finished_item_name",
    "fieldtype": "Data",
    "label": "Finished Item Name"
+  },
+  {
+   "fieldname": "boring",
+   "fieldtype": "Float",
+   "label": "boring"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-01-08 11:59:55.439084",
+ "modified": "2024-02-07 15:34:47.995468",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Item operations",

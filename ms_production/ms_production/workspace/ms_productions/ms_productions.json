@@ -1,323 +1,333 @@
 {
-    "charts": [
-     {
-      "chart_name": "Production Ok Quantity",
-      "label": "Downstream Processs Employee"
-     },
-     {
-      "chart_name": "Downstream Processs",
-      "label": "Downstream Processs"
-     }
-    ],
-    "content": "[{\"id\":\"B_TczgYiXo\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Downstream Processs Employee\",\"col\":6}},{\"id\":\"sfYZ6QLvMt\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Downstream Processs\",\"col\":6}},{\"id\":\"PGkVaXLmTi\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">MS Productions</span>\",\"col\":12}},{\"id\":\"DhcIvTr9pF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"id\":\"q7CptIoXmn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"xkbmYMyvH3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Production Schedule\",\"col\":3}},{\"id\":\"kzglGYz-z0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Material Request\",\"col\":3}},{\"id\":\"Sv12JU8iN5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Machine\",\"col\":3}},{\"id\":\"JPNXIhCTYW\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"_ecAoTPVWK\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"thV24bK-EP\",\"type\":\"card\",\"data\":{\"card_name\":\"Transaction\",\"col\":4}},{\"id\":\"0RNwQUa6f0\",\"type\":\"card\",\"data\":{\"card_name\":\"Machine Shop setting\",\"col\":4}},{\"id\":\"4FJXDUrjlf\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Report Section</b></span>\",\"col\":12}},{\"id\":\"J6oKo6l2b4\",\"type\":\"card\",\"data\":{\"card_name\":\"Production Reports\",\"col\":4}}]",
-    "creation": "2023-07-14 16:33:05.040705",
-    "custom_blocks": [],
-    "docstatus": 0,
-    "doctype": "Workspace",
-    "for_user": "",
-    "hide_custom": 1,
-    "icon": "dashboard-list",
-    "idx": 0,
-    "is_hidden": 0,
-    "label": "MS Productions",
-    "links": [
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Transaction",
-      "link_count": 6,
-      "onboard": 0,
-      "type": "Card Break"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Schedule",
-      "link_count": 0,
-      "link_to": "Production Schedule",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Job Order",
-      "link_count": 0,
-      "link_to": "Job Order",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production",
-      "link_count": 0,
-      "link_to": "Production",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Downstream Processes",
-      "link_count": 0,
-      "link_to": "Downstream Processes",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Stock Entry",
-      "link_count": 0,
-      "link_to": "Stock Entry",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Job Work Receipt",
-      "link_count": 0,
-      "link_to": "Job Work Receipt",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Machine Shop setting",
-      "link_count": 1,
-      "onboard": 0,
-      "type": "Card Break"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Machine Shop setting",
-      "link_count": 0,
-      "link_to": "Machine Shop Setting",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Masters",
-      "link_count": 7,
-      "onboard": 0,
-      "type": "Card Break"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Item Master",
-      "link_count": 0,
-      "link_to": "Item",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Operation Master",
-      "link_count": 0,
-      "link_to": "Operation Master",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Material Cycle Time",
-      "link_count": 0,
-      "link_to": "Material Cycle Time",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Machine Master",
-      "link_count": 0,
-      "link_to": "Machine",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Wages Master",
-      "link_count": 0,
-      "link_to": "Wages Master",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Downtime Reason",
-      "link_count": 0,
-      "link_to": "Reason",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Rejection Reasons",
-      "link_count": 0,
-      "link_to": "Rejection Reason",
-      "link_type": "DocType",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Reports",
-      "link_count": 7,
-      "onboard": 0,
-      "type": "Card Break"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Entry Analytics",
-      "link_count": 0,
-      "link_to": "Production Entry Analytics",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Downtime Analysis",
-      "link_count": 0,
-      "link_to": "Downtime Analysis",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Rejection Details",
-      "link_count": 0,
-      "link_to": "Rejections Details",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Downtime Summary",
-      "link_count": 0,
-      "link_to": "Production Downtime Summary",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Rejection Type Summary",
-      "link_count": 0,
-      "link_to": "Production Rejection Summary",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Item Wise Production",
-      "link_count": 0,
-      "link_to": "Item Wise Production",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     },
-     {
-      "dependencies": "Production",
-      "hidden": 0,
-      "is_query_report": 0,
-      "label": "Production Rejection Reasons Summary",
-      "link_count": 0,
-      "link_to": "Production Rejection Reasons Summary",
-      "link_type": "Report",
-      "onboard": 0,
-      "type": "Link"
-     }
-    ],
-    "modified": "2024-01-12 14:27:34.024797",
-    "modified_by": "akshay.m@erpdata.in",
-    "module": "Ms Production",
-    "name": "MS Productions",
-    "number_cards": [],
-    "owner": "Administrator",
-    "parent_page": "",
-    "public": 1,
-    "quick_lists": [],
-    "roles": [],
-    "sequence_id": 2.0,
-    "shortcuts": [
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Production Schedule",
-      "link_to": "Production Schedule",
-      "type": "DocType"
-     },
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Machine",
-      "link_to": "Machine",
-      "type": "DocType"
-     },
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Item",
-      "link_to": "Item",
-      "type": "DocType"
-     },
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Dashboard",
-      "link_to": "Machineshop",
-      "type": "Dashboard"
-     },
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Material Request",
-      "link_to": "Material Request",
-      "type": "DocType"
-     }
-    ],
-    "title": "MS Productions"
-   }
+ "charts": [
+  {
+   "chart_name": "Production Ok Quantity",
+   "label": "Downstream Processs Employee"
+  },
+  {
+   "chart_name": "Downstream Processs",
+   "label": "Downstream Processs"
+  }
+ ],
+ "content": "[{\"id\":\"B_TczgYiXo\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Downstream Processs Employee\",\"col\":6}},{\"id\":\"sfYZ6QLvMt\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Downstream Processs\",\"col\":6}},{\"id\":\"PGkVaXLmTi\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">MS Productions</span>\",\"col\":12}},{\"id\":\"DhcIvTr9pF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"id\":\"q7CptIoXmn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"xkbmYMyvH3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Production Schedule\",\"col\":3}},{\"id\":\"kzglGYz-z0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Material Request\",\"col\":3}},{\"id\":\"Sv12JU8iN5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Machine\",\"col\":3}},{\"id\":\"JPNXIhCTYW\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"_ecAoTPVWK\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"thV24bK-EP\",\"type\":\"card\",\"data\":{\"card_name\":\"Transaction\",\"col\":4}},{\"id\":\"0RNwQUa6f0\",\"type\":\"card\",\"data\":{\"card_name\":\"Machine Shop setting\",\"col\":4}},{\"id\":\"4FJXDUrjlf\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Report Section</b></span>\",\"col\":12}},{\"id\":\"J6oKo6l2b4\",\"type\":\"card\",\"data\":{\"card_name\":\"Production Reports\",\"col\":4}}]",
+ "creation": "2023-07-14 16:33:05.040705",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 1,
+ "icon": "dashboard-list",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "MS Productions",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Machine Shop setting",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Machine Shop setting",
+   "link_count": 0,
+   "link_to": "Machine Shop Setting",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Masters",
+   "link_count": 7,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Master",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Operation Master",
+   "link_count": 0,
+   "link_to": "Operation Master",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Material Cycle Time",
+   "link_count": 0,
+   "link_to": "Material Cycle Time",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Machine Master",
+   "link_count": 0,
+   "link_to": "Machine",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Wages Master",
+   "link_count": 0,
+   "link_to": "Wages Master",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Downtime Reason",
+   "link_count": 0,
+   "link_to": "Reason",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rejection Reasons",
+   "link_count": 0,
+   "link_to": "Rejection Reason",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Reports",
+   "link_count": 7,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Entry Analytics",
+   "link_count": 0,
+   "link_to": "Production Entry Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Downtime Analysis",
+   "link_count": 0,
+   "link_to": "Downtime Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Rejection Details",
+   "link_count": 0,
+   "link_to": "Rejections Details",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Downtime Summary",
+   "link_count": 0,
+   "link_to": "Production Downtime Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Rejection Type Summary",
+   "link_count": 0,
+   "link_to": "Production Rejection Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Wise Production",
+   "link_count": 0,
+   "link_to": "Item Wise Production",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "Production",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Rejection Reasons Summary",
+   "link_count": 0,
+   "link_to": "Production Rejection Reasons Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transaction",
+   "link_count": 7,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Schedule",
+   "link_count": 0,
+   "link_to": "Production Schedule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Job Order",
+   "link_count": 0,
+   "link_to": "Job Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production",
+   "link_count": 0,
+   "link_to": "Production",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Downstream Processes",
+   "link_count": 0,
+   "link_to": "Downstream Processes",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Entry",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Job Work Receipt",
+   "link_count": 0,
+   "link_to": "Job Work Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Machining Schedule",
+   "link_count": 0,
+   "link_to": "Machining Schedule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-02-05 15:59:30.279252",
+ "modified_by": "vivek.kumbhar@erpdata.in",
+ "module": "Ms Production",
+ "name": "MS Productions",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Production Schedule",
+   "link_to": "Production Schedule",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Machine",
+   "link_to": "Machine",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Item",
+   "link_to": "Item",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Dashboard",
+   "link_to": "Machineshop",
+   "type": "Dashboard"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Material Request",
+   "link_to": "Material Request",
+   "type": "DocType"
+  }
+ ],
+ "title": "MS Productions"
+}

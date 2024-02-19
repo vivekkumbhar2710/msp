@@ -26,9 +26,9 @@ class MachiningSchedule(Document):
 	def set_items_in_IMS(self):
 		if self.item_group:
 			if self.item_group == 'All Item Groups':
-				filters = {'custom_company': self.company}
+				filters = {'custom_company': self.company ,'disabled': 0}
 			else:
-				filters ={ "item_group" : self.item_group ,'custom_company': self.company}
+				filters ={ "item_group" : self.item_group ,'custom_company': self.company , 'disabled': 0}
 
 			doc = frappe.get_all( "Item" ,filters = filters ,fields = ["name" , "item_name"])
 			for d in doc:

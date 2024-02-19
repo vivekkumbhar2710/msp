@@ -4,14 +4,12 @@
 
 frappe.query_reports["Machining Summary Report"] = {
 	"filters": [
-
 		{
 			"fieldname": "company",
 			"fieldtype": "Link",
 			"label": "Company",
 			"options": "Company",
 			'reqd':1,
-			
 		},
 		{
 			"fieldname": "month",

@@ -31,7 +31,9 @@
   "column_break_17rny",
   "mr_warehouse_dp",
   "column_break_6nmnw",
-  "rw_warehouse_dp"
+  "rw_warehouse_dp",
+  "column_break_kxpfs",
+  "default_expense_account_for_downstream_process"
  ],
  "fields": [
   {
@@ -171,11 +173,21 @@
    "fieldtype": "Link",
    "label": "Expense Account For Wages",
    "options": "Account"
+  },
+  {
+   "fieldname": "column_break_kxpfs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_expense_account_for_downstream_process",
+   "fieldtype": "Link",
+   "label": "Default Expense Account for Downstream Process",
+   "options": "Account"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-20 11:08:29.869768",
+ "modified": "2024-02-07 17:34:14.018417",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Machine Shop Setting",

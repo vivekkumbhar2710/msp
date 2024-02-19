@@ -11,6 +11,8 @@
   "naming_series",
   "customer",
   "customer_name",
+  "order_type",
+  "order_no",
   "column_break1",
   "posting_date",
   "posting_time",
@@ -19,14 +21,22 @@
   "is_return",
   "return_against",
   "amended_from",
+  "challan_details_section",
+  "challan_no",
+  "challan_date",
+  "column_break_vcy2y",
+  "gate_no",
   "accounting_dimensions_section",
   "cost_center",
   "dimension_column_break",
   "project",
   "item_section_break",
   "set_warehouse",
+  "items",
+  "raw_items",
   "set_from_warehouse",
-  "item",
+  "return_items",
+  "rejected_items_reasons",
   "section_break1",
   "total_qty",
   "address_and_contact",
@@ -57,7 +67,7 @@
    "reqd": 1
   },
   {
-   "depends_on": "customer",
+   "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "label": "Customer Name",
@@ -94,15 +104,17 @@
   },
   {
    "default": "0",
+   "depends_on": "eval:doc.order_no==null;",
    "fieldname": "is_return",
    "fieldtype": "Check",
    "label": "Is Return"
   },
   {
-   "depends_on": "is_return",
+   "depends_on": "eval:doc.is_return==1;",
    "fieldname": "return_against",
-   "fieldtype": "Data",
-   "label": "Return Against Job Work Receipt"
+   "fieldtype": "Table MultiSelect",
+   "label": "Return Against Job Work Receipt",
+   "options": "Job Work Receipt Multi Select"
   },
   {
    "fieldname": "amended_from",
@@ -140,22 +152,18 @@
    "label": "Item"
   },
   {
+   "depends_on": "eval:doc.is_return==0;",
    "fieldname": "set_warehouse",
    "fieldtype": "Link",
    "label": "Accepted Warehouse",
    "options": "Warehouse"
   },
   {
+   "depends_on": "eval:doc.is_return==1;",
    "fieldname": "set_from_warehouse",
    "fieldtype": "Link",
    "label": "Set From Warehouse",
    "options": "Warehouse"
-  },
-  {
-   "fieldname": "item",
-   "fieldtype": "Table",
-   "label": "Item",
-   "options": "Job Work Receipt Item"
   },
   {
    "fieldname": "section_break1",
@@ -212,6 +220,72 @@
    "fieldtype": "Small Text",
    "label": "Contact Email",
    "options": "Email"
+  },
+  {
+   "depends_on": "eval:doc.is_return==0;",
+   "fieldname": "order_type",
+   "fieldtype": "Link",
+   "label": "Order Type",
+   "options": "DocType"
+  },
+  {
+   "depends_on": "eval:doc.is_return==0;",
+   "fieldname": "order_no",
+   "fieldtype": "Dynamic Link",
+   "label": "Order NO",
+   "options": "order_type"
+  },
+  {
+   "depends_on": "eval:doc.is_return==0;",
+   "fieldname": "raw_items",
+   "fieldtype": "Table",
+   "label": "Raw Items",
+   "options": "Job Work Receipt Raw Item"
+  },
+  {
+   "depends_on": "eval:doc.is_return==0;",
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Job Work Receipt Item"
+  },
+  {
+   "depends_on": "eval:doc.is_return==1;",
+   "fieldname": "return_items",
+   "fieldtype": "Table",
+   "label": "Return Items",
+   "options": "Return Job Work Receipt Item"
+  },
+  {
+   "depends_on": "eval:doc.is_return==1;",
+   "fieldname": "rejected_items_reasons",
+   "fieldtype": "Table",
+   "label": "Rejected Items Reasons",
+   "options": "Job Work Receipt Rejected Items Reasons"
+  },
+  {
+   "fieldname": "challan_details_section",
+   "fieldtype": "Section Break",
+   "label": "Challan Details"
+  },
+  {
+   "fieldname": "challan_no",
+   "fieldtype": "Data",
+   "label": "Challan No"
+  },
+  {
+   "fieldname": "challan_date",
+   "fieldtype": "Date",
+   "label": "Challan Date"
+  },
+  {
+   "fieldname": "column_break_vcy2y",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gate_no",
+   "fieldtype": "Data",
+   "label": "Gate No"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -222,7 +296,7 @@
    "link_fieldname": "job_work_receipt"
   }
  ],
- "modified": "2023-10-20 11:06:24.163841",
+ "modified": "2024-02-17 10:27:20.685573",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Job Work Receipt",
@@ -230,6 +304,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -239,6 +315,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

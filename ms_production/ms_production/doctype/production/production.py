@@ -91,35 +91,45 @@ class Production(Document):
 			items = []
 			additional_costs= []
 			items.append({
-				"item_code" : self.getRawItemName(item_name),
-				"qty" : self.getRawItemQty(item_name),
-				"s_warehouse": self.getRawItemWareHouse(item_name),
-			})
+						"item_code" : self.getRawItemName(item_name),
+						"qty" : self.getRawItemQty(item_name),
+						"s_warehouse": self.getRawItemWareHouse(item_name),
+						})
 			for j in self.getConsumables(item_name):
 				items.append(j)
 			for j in self.getToolings(item_name):
 				items.append(j)
-			items.append(
-				{
-                "item_code": i.item,
-                "qty":  self.getRawItemQty(item_name),
-                "t_warehouse": i.target_warehouse,
-				'is_finished_item':1
-				}
-			)
-
+			items.append({
+						"item_code": i.item,
+						"qty":  self.getRawItemQty(item_name),
+						"t_warehouse": i.target_warehouse,
+						'is_finished_item':1
+						})
+  
 			for k in self.get('qty_details'):
 				if k.item == i.item:
 					wedges_for_item= wedges_for_item+k.wages_per_item
+					boring_item_code =frappe.get_value('Material Cycle Time',{'item':i.item ,'company':self.company} ,'boring_item_code')
+					target_warehouse =frappe.get_value('Material Cycle Time',{'item':i.item ,'company':self.company} ,'target_warehouse')
+					# kaju = frappe.get_value('Raw Item Child', {'parent':demo,'downstream_process': self.downstream_process} ,'target_warehouse')
+					if boring_item_code and k.boring:
+						items.append({
+							"item_code": boring_item_code,
+							"qty": k.boring *k.ok_qty,
+							"t_warehouse": target_warehouse if target_warehouse else i.target_warehouse,
+							'is_scrap_item':1
+							})
+			expense_account =frappe.get_value("Machine Shop Setting",self.company,"expense_account_for_wages")
+			if expense_account:
+				additional_costs.append(
+					{
+					"expense_account": expense_account,
+					"description":  "Operation Cost",
+					"amount": wedges_for_item,
 
-			additional_costs.append(
-				{
-                "expense_account": 'Sales Expenses - AFPL',
-                "description":  "Operation Cost",
-                "amount": wedges_for_item,
+					}
+				)
 
-				}
-			)
 
 			stock_entry = frappe.get_doc({"doctype": "Stock Entry","stock_entry_type": "Manufacture","items": items,"additional_costs":additional_costs,"production_entry": self.name,"company":self.company,})
 		
@@ -184,6 +194,7 @@ class Production(Document):
 						'cycle_time':  itemOperations[ind].cycle_time,
 						'item': itemOperations[ind].item,
 						'machine': itemOperations[index-1].machine,
+						'boring':itemOperations[index-1].boring,
 
 					},)
 				else:
@@ -194,6 +205,7 @@ class Production(Document):
 					'cycle_time':  itemOperations[index-1].cycle_time,
 					'item': itemOperations[index-1].item,
 					'machine': itemOperations[index-1].machine,
+					'boring': itemOperations[index-1].boring,
 				},),
 
 	@frappe.whitelist()
@@ -467,9 +479,10 @@ class Production(Document):
 			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 			if demo:
 				for t in demo:
-					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time'])
+					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time','boring'])
 					if kaju:
 						v.cycle_time=kaju[0].cycle_time
+						v.boring = kaju[0].boring
 					elif v.operation:
 						frappe.throw(f'There is no Operation "{v.operation}" in "Material Cycle Time" for item {v.item}')
 			else:

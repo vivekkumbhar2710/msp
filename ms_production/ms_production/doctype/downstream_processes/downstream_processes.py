@@ -20,6 +20,9 @@ class DownstreamProcesses(Document):
 			if items:
 				for i in items:
 					if i.item :
+						demo =frappe.get_value('Material Cycle Time',{'item':i.item ,'company':self.company} ,'name')
+						kaju=frappe.get_value('Raw Item Child', {'parent':demo,'downstream_process': self.downstream_process} ,'target_warehouse')
+						i.target_warehouse=kaju
 						i.reference_id = str(i.item)
 				self.method_to_set_raw_item()
 
@@ -102,7 +105,7 @@ class DownstreamProcesses(Document):
 				demo =frappe.get_all('Material Cycle Time', filters={'item':i.item ,'company':self.company,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 				if demo:
 					for t in demo:
-						kaju=frappe.get_all('Raw Item Child', filters={'parent':t.name,'downstream_process': self.downstream_process} ,fields=['item',"item_name","qty"])
+						kaju=frappe.get_all('Raw Item Child', filters={'parent':t.name,'downstream_process': self.downstream_process} ,fields=['item',"item_name","qty",'source_warehouse'])
 						if kaju:
 							for y in kaju:
 								# frappe.msgprint(str(i.item)+str(y.item))
@@ -115,7 +118,7 @@ class DownstreamProcesses(Document):
 													'raw_item_name': str(y.item_name),
 													'required_qty':y.qty*i.qty if i.qty != None else 0,
 													'standard_qty':y.qty,
-													'source_warehouse': s__w,  #if i.item != y.item else None,
+													'source_warehouse':y.source_warehouse  if y.source_warehouse else s__w,  #if i.item != y.item else None,
 													'available_qty': self.get_available_quantity(y.item,s__w) if i.item == y.item else 0
 												},),
 								

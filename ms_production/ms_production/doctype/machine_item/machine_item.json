@@ -7,13 +7,18 @@
  "engine": "InnoDB",
  "field_order": [
   "operation",
+  "column_break_dz9fo",
   "operation_name",
+  "column_break_ygizf",
   "machine_type",
-  "cycle_time"
+  "column_break_bymci",
+  "cycle_time",
+  "column_break_ghxfh",
+  "boring"
  ],
  "fields": [
   {
-   "columns": 3,
+   "columns": 2,
    "fieldname": "operation",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -31,7 +36,7 @@
    "reqd": 1
   },
   {
-   "columns": 3,
+   "columns": 2,
    "fetch_from": "operation.operation",
    "fieldname": "operation_name",
    "fieldtype": "Data",
@@ -39,19 +44,42 @@
    "label": "Operation Name"
   },
   {
-   "columns": 3,
+   "columns": 2,
    "fieldname": "machine_type",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Machine Type",
    "options": "Machine Type",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_dz9fo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ygizf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bymci",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ghxfh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "boring",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Boring"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-01-05 16:27:31.459790",
+ "modified": "2024-02-07 15:05:39.872624",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Machine Item",

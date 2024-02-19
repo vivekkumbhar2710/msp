@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2024-02-15 14:38:55.816447",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "column_break_527or",
+  "item_name",
+  "section_break_msrng",
+  "returnable_quantity",
+  "column_break_xw4qr",
+  "as_it_is",
+  "column_break_nnwfk",
+  "cr_rejection",
+  "column_break_ym607",
+  "mr_rejection",
+  "column_break_ffe9s",
+  "other_rejection",
+  "column_break_eqxjm",
+  "return_quantity",
+  "section_break_swpri",
+  "source_warehouse",
+  "column_break_tahgt",
+  "available_quantity",
+  "reference_id"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "return_quantity",
+   "fieldtype": "Float",
+   "label": "Return Quantity"
+  },
+  {
+   "fieldname": "cr_rejection",
+   "fieldtype": "Int",
+   "label": "CR Rejection"
+  },
+  {
+   "fieldname": "mr_rejection",
+   "fieldtype": "Int",
+   "label": "MR Rejection"
+  },
+  {
+   "fieldname": "other_rejection",
+   "fieldtype": "Int",
+   "label": "Other Rejection"
+  },
+  {
+   "fieldname": "as_it_is",
+   "fieldtype": "Int",
+   "label": "As It Is"
+  },
+  {
+   "columns": 1,
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "available_quantity",
+   "fieldtype": "Float",
+   "label": "Available Quantity"
+  },
+  {
+   "columns": 1,
+   "fieldname": "returnable_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Returnable Quantity"
+  },
+  {
+   "fieldname": "column_break_527or",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_msrng",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_xw4qr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_nnwfk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ym607",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ffe9s",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_eqxjm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_swpri",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_tahgt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_id",
+   "fieldtype": "Data",
+   "label": "Reference ID"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-15 17:27:02.478970",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Return Job Work Receipt Item",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -13,7 +13,9 @@
   "mr_item_warehouse",
   "column_break_nnvio",
   "rw_item_warehouse",
-  "section_break_15wxk"
+  "section_break_15wxk",
+  "dea_production",
+  "dea_downstream"
  ],
  "fields": [
   {
@@ -56,12 +58,24 @@
   {
    "fieldname": "section_break_15wxk",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "dea_production",
+   "fieldtype": "Link",
+   "label": "Default Expense Account for Production",
+   "options": "Account"
+  },
+  {
+   "fieldname": "dea_downstream",
+   "fieldtype": "Link",
+   "label": "Default Expense Account for Downstream Process",
+   "options": "Account"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-12-15 15:30:56.440486",
+ "modified": "2024-02-07 17:31:52.788080",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "MS Production Setting",

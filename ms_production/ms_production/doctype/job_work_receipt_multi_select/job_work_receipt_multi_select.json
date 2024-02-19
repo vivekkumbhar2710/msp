@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-08 15:03:06.313293",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "job_work_receipt",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_work_receipt",
+   "fieldtype": "Link",
+   "label": "Job Work Receipt",
+   "options": "Job Work Receipt"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Work Receipt Multi Select",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "istable": 1,
+ "links": [
+  {
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "job_work_receipt"
+  }
+ ],
+ "modified": "2024-02-09 10:49:55.675651",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Job Work Receipt Multi Select",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

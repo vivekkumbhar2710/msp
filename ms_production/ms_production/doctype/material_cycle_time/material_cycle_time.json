@@ -17,6 +17,10 @@
   "column_break_rbhxe",
   "from_date",
   "to_date",
+  "column_break_ytda4",
+  "boring_item_code",
+  "boring_item_name",
+  "target_warehouse",
   "production_tab",
   "raw_item",
   "column_break_mcsjh",
@@ -57,6 +61,7 @@
   {
    "fieldname": "item",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Finished Item",
    "options": "Item",
    "reqd": 1
@@ -69,6 +74,7 @@
    "fetch_from": "item.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Item Name",
    "read_only": 1
   },
@@ -166,11 +172,33 @@
    "fieldtype": "Date",
    "hidden": 1,
    "label": "To date"
+  },
+  {
+   "fieldname": "column_break_ytda4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "boring_item_code",
+   "fieldtype": "Link",
+   "label": "Boring Item Code",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "boring_item_code.item_name",
+   "fieldname": "boring_item_name",
+   "fieldtype": "Data",
+   "label": "Boring Item Name"
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "label": "Target Warehouse For Boring",
+   "options": "Warehouse"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-19 14:16:03.782336",
+ "modified": "2024-02-15 15:23:15.771238",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Material Cycle Time",
