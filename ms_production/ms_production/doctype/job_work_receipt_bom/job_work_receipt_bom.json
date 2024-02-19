@@ -1,0 +1,130 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:finish_item_code",
+ "creation": "2024-02-13 15:50:11.892434",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "column_break_1av8p",
+  "column_break_cvs0e",
+  "date",
+  "section_break_lnpiq",
+  "finish_item_code",
+  "column_break_owxwe",
+  "item_name",
+  "column_break_mzvth",
+  "item_group",
+  "section_break_0nqf3",
+  "job_work_bom_details",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1av8p",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_cvs0e",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "section_break_lnpiq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "finish_item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Finish Item Code",
+   "options": "Item",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_owxwe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "finish_item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "column_break_mzvth",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "finish_item_code.item_group",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_0nqf3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "job_work_bom_details",
+   "fieldtype": "Table",
+   "label": "Job Work BOM Details",
+   "options": "Job Work Receipt Bom Details"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Work Receipt BOM",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-02-19 18:09:28.630965",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Job Work Receipt BOM",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
