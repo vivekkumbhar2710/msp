@@ -36,9 +36,12 @@
   "raw_items",
   "set_from_warehouse",
   "return_items",
-  "rejected_items_reasons",
+  "return_raw_items_details",
+  "section_break_ffpl5",
+  "finished_item_total_quantity",
+  "column_break_cdg9l",
+  "raw_item_total_quantity",
   "section_break1",
-  "total_qty",
   "address_and_contact",
   "section_addresses",
   "customer_address",
@@ -78,6 +81,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -85,6 +89,7 @@
    "reqd": 1
   },
   {
+   "default": "Now",
    "fieldname": "posting_time",
    "fieldtype": "Time",
    "in_list_view": 1,
@@ -170,11 +175,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "total_qty",
-   "fieldtype": "Float",
-   "label": "Total Quantity"
-  },
-  {
    "fieldname": "address_and_contact",
    "fieldtype": "Tab Break",
    "label": "Address & Contact"
@@ -257,13 +257,6 @@
    "options": "Return Job Work Receipt Item"
   },
   {
-   "depends_on": "eval:doc.is_return==1;",
-   "fieldname": "rejected_items_reasons",
-   "fieldtype": "Table",
-   "label": "Rejected Items Reasons",
-   "options": "Job Work Receipt Rejected Items Reasons"
-  },
-  {
    "fieldname": "challan_details_section",
    "fieldtype": "Section Break",
    "label": "Challan Details"
@@ -286,6 +279,31 @@
    "fieldname": "gate_no",
    "fieldtype": "Data",
    "label": "Gate No"
+  },
+  {
+   "depends_on": "eval:doc.is_return==1;",
+   "fieldname": "return_raw_items_details",
+   "fieldtype": "Table",
+   "label": "Return Raw Items Details",
+   "options": "Job Work Receipt Rejected Items Reasons"
+  },
+  {
+   "fieldname": "finished_item_total_quantity",
+   "fieldtype": "Float",
+   "label": "Finished Item Total Quantity"
+  },
+  {
+   "fieldname": "raw_item_total_quantity",
+   "fieldtype": "Float",
+   "label": "Raw Item Total Quantity"
+  },
+  {
+   "fieldname": "section_break_ffpl5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_cdg9l",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -294,9 +312,13 @@
   {
    "link_doctype": "Stock Entry",
    "link_fieldname": "job_work_receipt"
+  },
+  {
+   "link_doctype": "Delivery Note",
+   "link_fieldname": "custom_job_work_receipt"
   }
  ],
- "modified": "2024-02-17 10:27:20.685573",
+ "modified": "2024-02-21 12:18:48.007277",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Job Work Receipt",

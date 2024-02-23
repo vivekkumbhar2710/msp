@@ -1020,16 +1020,18 @@
    "label": "Reference ID"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "return_quantity",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Return Quantity"
+   "label": "Return Quantity",
+   "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2024-02-15 15:54:35.369661",
+ "modified": "2024-02-20 15:06:18.422198",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Job Work Receipt Item",

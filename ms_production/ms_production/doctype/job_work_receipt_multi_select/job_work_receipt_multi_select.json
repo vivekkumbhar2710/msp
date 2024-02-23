@@ -13,6 +13,7 @@
   {
    "fieldname": "job_work_receipt",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Job Work Receipt",
    "options": "Job Work Receipt"
   },
@@ -35,7 +36,7 @@
    "link_fieldname": "job_work_receipt"
   }
  ],
- "modified": "2024-02-19 18:09:29.165024",
+ "modified": "2024-02-20 15:04:30.593661",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Job Work Receipt Multi Select",

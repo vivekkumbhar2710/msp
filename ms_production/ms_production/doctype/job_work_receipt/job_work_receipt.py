@@ -12,16 +12,25 @@ class JobWorkReceipt(Document):
 	@frappe.whitelist()
 	def before_save(self):
 		if self.is_return:
-			pass
+			self.calculating_total_return()
 		else:
 			self.validate_items()
+			self.calculating_total_inword()
 
 	@frappe.whitelist()
 	def before_submit(self):
 		if self.is_return:
-			pass
+			self.updated_item_before_submit()
+			self.in_delivery_note()
 		else:
 			self.in_material_receipt()
+
+	@frappe.whitelist()
+	def before_cancel(self):
+		if self.is_return:
+			self.updated_item_before_cancel()
+		else:
+			pass
 
 
 
@@ -78,7 +87,7 @@ class JobWorkReceipt(Document):
 						if l.quantity_per_finished_item:
 							l.required_qty = l.quantity_per_finished_item * j.qty
 
-
+			self.calculating_total_inword()
 
 	@frappe.whitelist()
 	def in_material_receipt(self):
@@ -117,8 +126,18 @@ class JobWorkReceipt(Document):
 						d.reference_id = p.name
 				else:
 					frappe.throw(f'It Is Mandatory To Define Raw Item For Item Code "{p.item_code}".')
+
+
+	@frappe.whitelist()
+	def calculating_total_inword(self):
+		self.finished_item_total_quantity = self.calculating_total('items','qty')
+		self.raw_item_total_quantity = self.calculating_total('raw_items','required_qty')
 # ======================================================================================= IS RETURN ===============================================================================
-	
+	@frappe.whitelist()
+	def calculating_total_return(self):
+		self.finished_item_total_quantity = self.calculating_total('return_items','return_quantity')
+		self.raw_item_total_quantity = self.calculating_total('return_raw_items_details','quantity')
+
 	@frappe.whitelist()
 	def set_data_from_jwr(self):
 		if self.is_return:
@@ -128,60 +147,136 @@ class JobWorkReceipt(Document):
 				for d in items:
 					returnable_quantity =  d.qty - d.return_quantity
 					self.append("return_items",
-											{	'item_code': d.item_code ,
+											{	'challan_reference': i.job_work_receipt ,
+												'item_code': d.item_code ,
 												'returnable_quantity': returnable_quantity ,
 												'reference_id': d.reference_id,
 												'item_name':d.item_name},),
+	
+	
 
 	@frappe.whitelist()
 	def finish_total_quentity_calculate(self):
 		for j in self.get("return_items"):
 			j.total_quantity = getVal(j.as_it_is) + getVal(j.cr_rejection) + getVal(j.mr_rejection) + getVal(j.other_rejection) + getVal(j.return_quantity)
-	
-			if j.total_quantity > j.returnable_quantity:
+
+			
+			if getVal(j.total_quantity) > getVal(j.returnable_quantity):
 				frappe.throw(f'Total Quantity For Item {j.item_code}-{j.item_name} is Should Not Be Greater Than Actual Required Quantity ')
+		self.set_dat_in_raw_return_items_reasons()
+		self.calculating_total_return()
+
+	@frappe.whitelist()
+	def set_dat_in_raw_return_items_reasons(self):
+		for n in self.get("return_items"):
+			if n.item_code:
+				raw_items_table = frappe.get_all("Job Work Receipt Raw Item" , filters = {'reference_id' : n.reference_id }, fields = ['finished_item_code','raw_item_code','quantity_per_finished_item'])
+				for i in raw_items_table:
+					if n.as_it_is:
+						return_type = 'As It Is (As It Is Transfer)'
+						quantity = i.quantity_per_finished_item * n.as_it_is
+						self.append("return_raw_items_details",
+												{	'return_type' : return_type,
+													'item_code': i.finished_item_code ,
+													'raw_item_code': i.raw_item_code ,
+													'quantity': quantity ,
+													'reference_id': n.reference_id,},),
+						
+					if n.cr_rejection:
+						return_type = 'CR (Casting Rejection)'
+						quantity = i.quantity_per_finished_item * n.cr_rejection
+						self.append("return_raw_items_details",
+												{	'return_type' : return_type,
+													'item_code': i.finished_item_code ,
+													'raw_item_code': i.raw_item_code ,
+													'quantity': quantity ,
+													'reference_id': n.reference_id,},),
+					if n.mr_rejection:
+						return_type = 'MR (Machine Rejection)'
+						quantity = i.quantity_per_finished_item * n.mr_rejection
+						self.append("return_raw_items_details",
+												{	'return_type' : return_type,
+													'item_code': i.finished_item_code ,
+													'raw_item_code': i.raw_item_code ,
+													'quantity': quantity ,
+													'reference_id': n.reference_id,},),
+					if n.other_rejection:
+						return_type = 'Other (Other Rejection)'
+						quantity = i.quantity_per_finished_item * n.other_rejection
+						self.append("return_raw_items_details",
+												{	'return_type' : return_type,
+													'item_code': i.finished_item_code ,
+													'raw_item_code': i.raw_item_code ,
+													'quantity': quantity ,
+													'reference_id': n.reference_id,},),
+	@frappe.whitelist()
+	def updated_item_before_submit(self):
+		if self.is_return:
+			for n in self.get("return_items"):
+				if n.item_code:
+					total_quantity = getVal(n.as_it_is) + getVal(n.cr_rejection) + getVal(n.mr_rejection) + getVal(n.other_rejection) + getVal(n.return_quantity)
+					return_quantity = frappe.get_value('Job Work Receipt Item', n.reference_id , 'return_quantity')
+					updated_qty = return_quantity + total_quantity
+					frappe.set_value('Job Work Receipt Item', n.reference_id , 'return_quantity' , updated_qty )
+
+	@frappe.whitelist()
+	def updated_item_before_cancel(self):
+		if self.is_return:
+			for n in self.get("return_items"):
+				if n.item_code:
+					total_quantity = getVal(n.as_it_is) + getVal(n.cr_rejection) + getVal(n.mr_rejection) + getVal(n.other_rejection) + getVal(n.return_quantity)
+					return_quantity = frappe.get_value('Job Work Receipt Item', n.reference_id , 'return_quantity')
+					updated_qty = return_quantity - total_quantity
+					frappe.set_value('Job Work Receipt Item', n.reference_id , 'return_quantity' , updated_qty )
+
 
 
 	@frappe.whitelist()
-	def set_dat_in_rejected_items_reasons(self):
-		for n in self.get("return_items"):
-			if n.item_code:
-				pass
-			# for x in doc:
-			# 	per_unit_finish =  x.get('required_quantity')
-			# 	if n.cr_casting_rejection:
-			# 		cr_qty = n.cr_casting_rejection * per_unit_finish
-			# 		self.append("rejected_items_reasons",{
-			# 					'item_code':  x.get('item_code'),
-			# 					'item_name':x.get('item_name'),
-			# 					'reference_id': n.get('reference_id'),
-			# 					'rejection_type': "CR (Casting Rejection)",
-			# 					'quantity': cr_qty,
-			# 					'weight_per_unit': n.weight_per_unit,
-			# 					'total_rejected_weight': n.weight_per_unit * cr_qty,
-			# 					'target_warehouse':'',
-			# 				},),
-			# 	if n.mr_machine_rejection:
-			# 		mr_qty = n.mr_machine_rejection * per_unit_finish
-			# 		self.append("rejected_items_reasons",{
-			# 					'item_code':  x.get('item_code'),
-			# 					'item_name':x.get('item_name'),
-			# 					'reference_id': n.get('reference_id'),
-			# 					'rejection_type': "MR (Machine Rejection)",
-			# 					'quantity': mr_qty,
-			# 					'weight_per_unit': n.weight_per_unit,
-			# 					'total_rejected_weight': n.weight_per_unit * mr_qty,
-			# 					'target_warehouse':'',
-			# 				},),
-			# 	if n.rw_rework:
-			# 		rw_qty = n.rw_rework * per_unit_finish
-			# 		self.append("rejected_items_reasons",{
-			# 					'item_code': x.get('item_code'),
-			# 					'item_name':x.get('item_name'),
-			# 					'reference_id': n.get('reference_id'),
-			# 					'rejection_type': "RW (Rework)",
-			# 					'quantity': rw_qty,
-			# 					'weight_per_unit': n.weight_per_unit,
-			# 					'total_rejected_weight': n.weight_per_unit * rw_qty,
-			# 					'target_warehouse':'',
-			# 				},),
+	def in_delivery_note(self):
+		if self.is_return:
+			se = frappe.new_doc("Delivery Note")
+			se.customer = self.customer
+			se.company = self.company
+			se.posting_date = self.posting_date
+			se.posting_time = self.posting_time
+			for p in self.get("return_items" , filters = {'return_quantity':['not in', [0,None]]}):
+				se.append(
+						"items",
+						{
+							"item_code": p.item_code,
+							"qty": p.return_quantity,
+							"warehouse": p.source_warehouse,
+						},)
+
+			for m in self.get("return_raw_items_details" , filters = {'quantity':['not in', [0,None]]}):
+				se.append(
+						"items",
+						{
+							"item_code": m.raw_item_code,
+							"qty": m.quantity,
+							"warehouse": m.source_warehouse,
+						},)
+			p = se.items
+			# frappe.throw(str(p))
+			if p:
+				se.custom_job_work_receipt = self.name		
+				se.insert()
+				se.save()
+				se.submit()
+
+# ======================================================================================= Both ===============================================================================
+
+	@frappe.whitelist()
+	def set_warehouse_in_child_table(self,source_warehouse , child_table , warehouse_in_table):
+		for tn in self.get(child_table):
+			setattr(tn, warehouse_in_table, source_warehouse)
+	
+
+	@frappe.whitelist()
+	def calculating_total(self,child_table ,total_field):
+		casting_details = self.get(child_table)
+		total_pouring_weight = 0
+		for i in casting_details:
+			field_data = i.get(total_field)
+			total_pouring_weight = getVal(total_pouring_weight) + getVal(field_data)
+		return total_pouring_weight

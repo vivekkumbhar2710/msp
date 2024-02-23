@@ -194,6 +194,7 @@ class DownstreamProcesses(Document):
 	@frappe.whitelist()
 	def manifacturing_stock_entry(self):
 		for p in self.get("items"):
+			# frappe.throw("1")
 			temp = 0      
 			se = frappe.new_doc("Stock Entry")
 			se.stock_entry_type = "Manufacture"
@@ -201,10 +202,14 @@ class DownstreamProcesses(Document):
 			se.posting_date = self.date
 			peacock = len(self.get("raw_items"))
 			for g in self.get("raw_items" ,filters = {"reference_id": p.reference_id , }):  # filters = {"": , "": }
+				
 				if (str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item == g.raw_item ):
-					for b in self.get("qty_details",filters = {"reference_id": p.reference_id , 'ok_qty':['<',0 ]}):
+					
+					for b in self.get("qty_details",filters = {"reference_id": p.reference_id , 'ok_qty':['>',0 ]}):
+						# frappe.throw("b"+str(b))
 						if  (str(p.job_order) == str(b.job_order)) and (p.item == b.item):
 							temp = 1
+							
 							se.append(
 									"items",
 									{
@@ -222,8 +227,12 @@ class DownstreamProcesses(Document):
 							},)
 
 				elif(str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item != g.raw_item):
-					for v in self.get("qty_details" , filters= {'ok_qty':['<',0 ]}):
+					# frappe.throw("c")
+					temp = 1
+					for v in self.get("qty_details" , filters= {'ok_qty':['.',0 ]}):
+						
 						if (str(p.job_order) == str(v.job_order)) and (p.item == v.item):
+							
 							se.append(
 									"items",
 									{
@@ -235,6 +244,9 @@ class DownstreamProcesses(Document):
 				elif g==peacock:
 					frappe.throw(f'There is Row Item {g.item} present in "Raw Items" table')
 			se.downstream_process = self.name
+
+			# np = se.items
+			# frappe.throw(str(np))
 			if temp != 0:	
 				se.insert()
 				se.save()
