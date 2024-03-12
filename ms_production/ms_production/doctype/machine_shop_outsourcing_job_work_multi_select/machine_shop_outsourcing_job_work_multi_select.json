@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-09 11:11:04.699934",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "outsourcing_job_work"
+ ],
+ "fields": [
+  {
+   "fieldname": "outsourcing_job_work",
+   "fieldtype": "Link",
+   "label": "Outsourcing Job Work ",
+   "options": "Machine Shop Outsourcing Job Work"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-09 14:19:53.669713",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machine Shop Outsourcing Job Work Multi select",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

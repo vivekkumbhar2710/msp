@@ -229,10 +229,10 @@ class DownstreamProcesses(Document):
 				elif(str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item != g.raw_item):
 					# frappe.throw("c")
 					temp = 1
-					for v in self.get("qty_details" , filters= {'ok_qty':['.',0 ]}):
+					for v in self.get("qty_details" , filters= {'ok_qty':['>',0 ]}):
 						
 						if (str(p.job_order) == str(v.job_order)) and (p.item == v.item):
-							
+							# frappe.throw("hiiii")
 							se.append(
 									"items",
 									{
@@ -240,6 +240,15 @@ class DownstreamProcesses(Document):
 										"qty": g.standard_qty * v.ok_qty ,
 										"s_warehouse": g.source_warehouse,
 									},)
+							
+							se.append(
+							"items",
+							{
+								"item_code": p.item,
+								"qty": g.standard_qty * v.ok_qty,
+								"t_warehouse": p.target_warehouse,
+								'is_finished_item':True
+							},)
 					
 				elif g==peacock:
 					frappe.throw(f'There is Row Item {g.item} present in "Raw Items" table')

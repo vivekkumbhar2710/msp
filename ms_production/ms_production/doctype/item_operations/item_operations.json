@@ -15,7 +15,8 @@
   "column_break_h1zqt",
   "finished_item_name",
   "operation_name",
-  "boring"
+  "boring",
+  "operation_rate"
  ],
  "fields": [
   {
@@ -81,12 +82,17 @@
    "fieldname": "boring",
    "fieldtype": "Float",
    "label": "boring"
+  },
+  {
+   "fieldname": "operation_rate",
+   "fieldtype": "Float",
+   "label": "Operation Rate"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-02-07 15:34:47.995468",
+ "modified": "2024-03-11 14:33:36.797449",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Item operations",

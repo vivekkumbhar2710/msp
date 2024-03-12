@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-09 12:03:12.770455",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "finish_item_code",
+  "column_break_x54lb",
+  "finish_item_name",
+  "column_break_q0y28",
+  "finish_item_group",
+  "column_break_nuwtg",
+  "company",
+  "section_break_9pop4",
+  "outsourcing_bom_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "finish_item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Finish Item Code",
+   "options": "Item",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_x54lb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "finish_item_code.item_name",
+   "fieldname": "finish_item_name",
+   "fieldtype": "Data",
+   "label": "Finish Item Name"
+  },
+  {
+   "fieldname": "column_break_q0y28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "finish_item_code.item_group",
+   "fieldname": "finish_item_group",
+   "fieldtype": "Link",
+   "label": "Finish Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "column_break_nuwtg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_9pop4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "outsourcing_bom_details",
+   "fieldtype": "Table",
+   "label": "Outsourcing BOM Details",
+   "options": "Machine Shop Outsourcing BOM Details",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-03-09 14:19:51.546533",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machine Shop Outsourcing BOM",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

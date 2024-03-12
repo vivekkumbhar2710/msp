@@ -9,6 +9,8 @@
   "operation",
   "column_break_dz9fo",
   "operation_name",
+  "section_break_dlul7",
+  "operation_rate",
   "column_break_ygizf",
   "machine_type",
   "column_break_bymci",
@@ -74,12 +76,21 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Boring"
+  },
+  {
+   "fieldname": "section_break_dlul7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "operation_rate",
+   "fieldtype": "Float",
+   "label": "Operation rate"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-02-07 15:05:39.872624",
+ "modified": "2024-03-11 14:22:48.610243",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Machine Item",

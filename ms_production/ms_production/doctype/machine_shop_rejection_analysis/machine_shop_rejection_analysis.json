@@ -1,0 +1,271 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-03-09 10:43:33.373885",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "column_break_lshde",
+  "column_break_vyeuz",
+  "column_break_vba8t",
+  "section_break_f6zmq",
+  "company",
+  "column_break_jue7e",
+  "posting_date",
+  "column_break_v53cq",
+  "rejection_type",
+  "column_break_4saqn",
+  "section_break_kxdk6",
+  "supervisor_id",
+  "column_break_yygi4",
+  "supervisor_name",
+  "column_break_p3smo",
+  "operator_id",
+  "column_break_cfjjb",
+  "operator_name",
+  "section_break_r5hym",
+  "customer_id",
+  "column_break_rovgk",
+  "customer_name",
+  "column_break_x4ugk",
+  "delivery_note",
+  "column_break_vxhmc",
+  "sales_invoice",
+  "section_break_mdh5t",
+  "rejection_analysis_outsourcing_job_work",
+  "column_break_oqfeo",
+  "source_warehouse",
+  "column_break_qmtsk",
+  "target_warehouse",
+  "column_break_khfun",
+  "section_break_qx201",
+  "rejection_details",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MSRA -"
+  },
+  {
+   "fieldname": "column_break_lshde",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vyeuz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vba8t",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_f6zmq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_jue7e",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Data",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "column_break_v53cq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rejection_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Rejection Type",
+   "options": "\nCustomer Returned\nSubcontract Returned",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_4saqn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_kxdk6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "supervisor_id",
+   "fieldtype": "Link",
+   "label": "Supervisor Id",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_yygi4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supervisor_id.employee_name",
+   "fieldname": "supervisor_name",
+   "fieldtype": "Data",
+   "label": "Supervisor Name"
+  },
+  {
+   "fieldname": "column_break_p3smo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "operator_id",
+   "fieldtype": "Link",
+   "label": "Operator Id",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_cfjjb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "operator_id.employee_name",
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Operator Name"
+  },
+  {
+   "fieldname": "section_break_r5hym",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.rejection_type ==\"Customer Returned\"",
+   "fieldname": "customer_id",
+   "fieldtype": "Link",
+   "label": "Customer ID",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_rovgk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.rejection_type ==\"Customer Returned\"",
+   "fetch_from": "customer_id.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "column_break_x4ugk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.rejection_type ==\"Customer Returned\"",
+   "fieldname": "delivery_note",
+   "fieldtype": "Table MultiSelect",
+   "label": "Delivery Note",
+   "options": "Machine Shop Delivery Order Multi Select"
+  },
+  {
+   "fieldname": "column_break_vxhmc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.rejection_type ==\"Customer Returned\"",
+   "fieldname": "sales_invoice",
+   "fieldtype": "Table MultiSelect",
+   "label": "Sales Invoice",
+   "options": "Machine Shop Sales Invoice Multi Select"
+  },
+  {
+   "fieldname": "section_break_mdh5t",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rejection_analysis_outsourcing_job_work",
+   "fieldtype": "Table MultiSelect",
+   "label": "Outsourcing Job Work",
+   "options": "Machine Shop Outsourcing Job Work Multi select"
+  },
+  {
+   "fieldname": "column_break_oqfeo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "label": "Select Source Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "column_break_qmtsk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "label": " Select Target Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "column_break_khfun",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_qx201",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rejection_details",
+   "fieldtype": "Table",
+   "label": "Rejection Details",
+   "options": "Machine Shop Rejection Details"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Machine Shop Rejection Analysis",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-09 14:19:55.939012",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machine Shop Rejection Analysis",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -34,6 +34,12 @@ frappe.query_reports["Machining Summary Report"] = {
 			"options": "Item",
 			
 		},
-
+		{
+			"fieldname": "include_uom",
+			"fieldtype": "Link",
+			"label": "Include UOM",
+			"options": "UOM",
+			'default': 'Kg',
+		},
 	]
 };

@@ -479,10 +479,11 @@ class Production(Document):
 			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 			if demo:
 				for t in demo:
-					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time','boring'])
+					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time','boring','operation_rate'])
 					if kaju:
 						v.cycle_time=kaju[0].cycle_time
 						v.boring = kaju[0].boring
+						v.operation_rate = kaju[0].operation_rate
 					elif v.operation:
 						frappe.throw(f'There is no Operation "{v.operation}" in "Material Cycle Time" for item {v.item}')
 			else:
