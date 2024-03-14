@@ -43,6 +43,7 @@
   "get_rejected_item",
   "rejected_items_reasons",
   "section_break_bnvja",
+  "downstream_processes_additional_cost_details",
   "downtime_reason_details",
   "amended_from"
  ],
@@ -273,6 +274,13 @@
    "fieldname": "without_production_entry",
    "fieldtype": "Check",
    "label": "Downstream Processes Without Production Entry"
+  },
+  {
+   "depends_on": "eval: doc.downstream_process != null  && ((doc.production && doc.production.length > 0) || doc.without_production_entry === 1 );",
+   "fieldname": "downstream_processes_additional_cost_details",
+   "fieldtype": "Table",
+   "label": "Downstream Processes Additional Cost Details",
+   "options": "Downstream Processes Additional Cost Details"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -284,7 +292,7 @@
    "table_fieldname": "stock enry"
   }
  ],
- "modified": "2024-03-04 13:09:31.308181",
+ "modified": "2024-03-12 15:40:42.368891",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Downstream Processes",

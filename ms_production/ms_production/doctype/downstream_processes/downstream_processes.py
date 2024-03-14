@@ -194,30 +194,12 @@ class DownstreamProcesses(Document):
 	@frappe.whitelist()
 	def manifacturing_stock_entry(self):
 		for p in self.get("items"):
-			# frappe.throw("1")
-			temp = 0      
 			se = frappe.new_doc("Stock Entry")
 			se.stock_entry_type = "Manufacture"
 			se.company = self.company
 			se.posting_date = self.date
-			peacock = len(self.get("raw_items"))
-			for g in self.get("raw_items" ,filters = {"reference_id": p.reference_id , }):  # filters = {"": , "": }
-				
-				if (str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item == g.raw_item ):
-					
-					for b in self.get("qty_details",filters = {"reference_id": p.reference_id , 'ok_qty':['>',0 ]}):
-						# frappe.throw("b"+str(b))
-						if  (str(p.job_order) == str(b.job_order)) and (p.item == b.item):
-							temp = 1
-							
-							se.append(
-									"items",
-									{
-										"item_code": p.item,
-										"qty": b.ok_qty,
-										"s_warehouse": g.source_warehouse,
-									},)
-							se.append(
+			for b in self.get("qty_details",filters = {"reference_id": p.reference_id , 'ok_qty':['>',0 ], 'item': p.item}):
+				se.append(
 							"items",
 							{
 								"item_code": p.item,
@@ -225,38 +207,31 @@ class DownstreamProcesses(Document):
 								"t_warehouse": p.target_warehouse,
 								'is_finished_item':True
 							},)
-
-				elif(str(p.job_order) == str(g.job_order)) and (p.item == g.item) and (p.item != g.raw_item):
-					# frappe.throw("c")
-					temp = 1
-					for v in self.get("qty_details" , filters= {'ok_qty':['>',0 ]}):
-						
-						if (str(p.job_order) == str(v.job_order)) and (p.item == v.item):
-							# frappe.throw("hiiii")
-							se.append(
-									"items",
-									{
-										"item_code": g.raw_item,
-										"qty": g.standard_qty * v.ok_qty ,
-										"s_warehouse": g.source_warehouse,
-									},)
-							
-							se.append(
-							"items",
-							{
-								"item_code": p.item,
-								"qty": g.standard_qty * v.ok_qty,
-								"t_warehouse": p.target_warehouse,
-								'is_finished_item':True
-							},)
-					
-				elif g==peacock:
-					frappe.throw(f'There is Row Item {g.item} present in "Raw Items" table')
+				raw_items = self.get('raw_items' , filters = {'reference_id': p.reference_id , 'item': p.item })
+				for f in raw_items:
+					se.append(
+								"items",
+								{
+									"item_code": f.raw_item,
+									"qty": f.standard_qty * b.ok_qty ,
+									"s_warehouse": f.source_warehouse,
+								},)
+			
 			se.downstream_process = self.name
+			expense_account =frappe.get_value("Machine Shop Setting",self.company,"expense_account_for_wages")
+			for s in self.get("downstream_processes_additional_cost_details" , filters = {'finished_item_code': p.item,'production':p.production}):
+				if (expense_account or s.expense_head_account) and s.amount:
+					se.append(
+						"additional_costs",
+						{
+						"expense_account": s.expense_head_account if s.expense_head_account else expense_account,
+						"description":  s.discription ,
+						"amount": s.amount,
 
-			# np = se.items
-			# frappe.throw(str(np))
-			if temp != 0:	
+						}
+					)
+
+			if raw_items:	
 				se.insert()
 				se.save()
 				se.submit()
@@ -325,12 +300,22 @@ class DownstreamProcesses(Document):
 		# frappe.throw("hii.......")
 
 
-	@frappe.whitelist()	
-	def test_method(self):
-		rows = self.get('raw_items')
-		for r in rows:
-			if r.item=='1010100007':
-				r.standard_qty=333
+	@frappe.whitelist()
+	def set_additional_cost(self):
+		expense_account =frappe.get_value("Machine Shop Setting",self.company,"expense_account_for_wages")
+		for d in self.get('items'):
+			for i in self.get('qty_details', filters = {'item': d.item , 'production' : d.production}):
+					demo =frappe.get_value('Material Cycle Time',{'item':i.item ,'company':self.company} ,'name')
+					rate=frappe.get_value('Raw Item Child', {'parent':demo,'downstream_process': self.downstream_process} ,'rate')
+					if i.ok_qty and rate:
+						self.append("downstream_processes_additional_cost_details",{
+													'finished_item_code': d.item,
+													'production':d.production,
+													'discription':(f'{d.item}-{d.item_name} of Operation {self.downstream_process}  Cost'),
+													'expense_head_account': expense_account,
+													'amount': getVal(i.ok_qty) * getVal(rate),
+												},),
+
 
 		# frappe.throw(str(rows[0].clear()))
 

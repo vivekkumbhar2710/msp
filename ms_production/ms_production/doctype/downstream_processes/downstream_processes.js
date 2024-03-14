@@ -7,6 +7,18 @@ frappe.ui.form.on('Downstream Processes', {
 	// }
 });
 
+frappe.ui.form.on('Downstream Processes', {
+    before_save: function (frm) {
+	frm.clear_table("downstream_processes_additional_cost_details");
+    frm.refresh_field('downstream_processes_additional_cost_details');
+        frm.call({
+            method: 'set_additional_cost',
+            doc: frm.doc,
+        })
+
+    }
+});
+
 
 frappe.ui.form.on('Downstream Processes', {
     refresh: function(frm) {

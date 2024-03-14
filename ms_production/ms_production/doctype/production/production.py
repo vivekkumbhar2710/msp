@@ -86,7 +86,7 @@ class Production(Document):
         
 	def create_manufacture_stock_entry(self):
 		for i in self.get('items'):
-			wedges_for_item =0
+			# wedges_for_item =0
 			item_name = i.item
 			items = []
 			additional_costs= []
@@ -108,7 +108,7 @@ class Production(Document):
   
 			for k in self.get('qty_details'):
 				if k.item == i.item:
-					wedges_for_item= wedges_for_item+k.wages_per_item
+					# wedges_for_item= wedges_for_item+k.wages_per_item
 					boring_item_code =frappe.get_value('Material Cycle Time',{'item':i.item ,'company':self.company} ,'boring_item_code')
 					target_warehouse =frappe.get_value('Material Cycle Time',{'item':i.item ,'company':self.company} ,'target_warehouse')
 					# kaju = frappe.get_value('Raw Item Child', {'parent':demo,'downstream_process': self.downstream_process} ,'target_warehouse')
@@ -120,15 +120,17 @@ class Production(Document):
 							'is_scrap_item':1
 							})
 			expense_account =frappe.get_value("Machine Shop Setting",self.company,"expense_account_for_wages")
-			if expense_account:
-				additional_costs.append(
-					{
-					"expense_account": expense_account,
-					"description":  "Operation Cost",
-					"amount": wedges_for_item,
 
-					}
-				)
+			for s in self.get("production_additional_cost_details" , filters = {'finished_item_code': i.item}):
+				if (expense_account or s.expense_head_account) and s.amount :
+					additional_costs.append(
+						{
+						"expense_account": s.expense_head_account if s.expense_head_account else expense_account,
+						"description":  s.discription ,
+						"amount": s.amount,
+
+						}
+					)
 
 
 			stock_entry = frappe.get_doc({"doctype": "Stock Entry","stock_entry_type": "Manufacture","items": items,"additional_costs":additional_costs,"production_entry": self.name,"company":self.company,})
@@ -672,4 +674,25 @@ class Production(Document):
 	@frappe.whitelist()
 	def check_machines(self):
 		pass
+
+	@frappe.whitelist()
+	def set_additional_cost(self):
+		expense_account =frappe.get_value("Machine Shop Setting",self.company,"expense_account_for_wages")
+		for d in self.get('items'):
+			for i in self.get('item_operations', filters = {'item': d.item}):
+				for j in self.get('qty_details' ,filters = {'item': d.item , 'operation': i.operation}):
+					self.append("production_additional_cost_details",{
+																		'finished_item_code': d.item,
+																		'discription':(f'{d.item}-{d.item_name} of Operation {i.operation}-{i.operation_name} Wages Cost'),
+																		'expense_head_account': expense_account,
+																		'amount': j.wages_per_item,
+																	},),
+
+					self.append("production_additional_cost_details",{
+																		'finished_item_code': d.item,
+																		'discription':(f'{d.item}-{d.item_name} of Operation {i.operation}-{i.operation_name} Operation cost'),
+																		'expense_head_account': expense_account,
+																		'amount': getVal(j.ok_qty) * getVal(i.operation_rate),
+																	},),
+
 	
