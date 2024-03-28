@@ -77,6 +77,8 @@ class Production(Document):
     	    "doctype": "Stock Entry",
         	"stock_entry_type": "Material Transfer",
         	"items": items,
+			"set_posting_time":True ,
+			'posting_date':self.date,
 			"production_entry": self.name,
 			"company":self.company,
         	})
@@ -133,7 +135,7 @@ class Production(Document):
 					)
 
 
-			stock_entry = frappe.get_doc({"doctype": "Stock Entry","stock_entry_type": "Manufacture","items": items,"additional_costs":additional_costs,"production_entry": self.name,"company":self.company,})
+			stock_entry = frappe.get_doc({"doctype": "Stock Entry","stock_entry_type": "Manufacture","set_posting_time":True ,'posting_date':self.date,"items": items,"additional_costs":additional_costs,"production_entry": self.name,"company":self.company,})
 		
 
 			stock_entry.insert()

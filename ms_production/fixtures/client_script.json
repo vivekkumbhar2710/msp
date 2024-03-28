@@ -4,10 +4,10 @@
   "doctype": "Client Script",
   "dt": "Item",
   "enabled": 1,
-  "modified": "2024-02-20 12:19:53.955963",
+  "modified": "2024-03-23 15:23:25.994101",
   "module": "Ms Production",
   "name": "Filter-Other Machine Shop",
-  "script": "var item_group=\"Raw Material\"\nvar company_field ='custom_company'\n\nfrappe.ui.form.on('Item', {\n\tsetup: function(frm) {\n    \tfrm.set_query(\"raw_material\",function(doc, cdt, cdn) {\n\t\tlet d = locals[cdt][cdn];\n\t\treturn {\n\t\t\tfilters: [\n        \t\t\t  ['Item', 'item_group', '=',item_group],\n        \t\t\t  [\"Item\", company_field, '=', doc.custom_company]\n\t\t\t\t]\n\t\t\t};\n    \t});\n\t}\n});\n",
+  "script": "var item_group=\"Raw Material\"\nvar company_field ='custom_company'\n\nfrappe.ui.form.on('Item', {\n\tsetup: function(frm) {\n    \tfrm.set_query(\"raw_material\",function(doc, cdt, cdn) {\n\t\tlet d = locals[cdt][cdn];\n\t\treturn {\n\t\t\tfilters: [\n        \t\t\t // ['Item', 'item_group', '=',item_group],\n        \t\t\t  [\"Item\", company_field, '=', doc.custom_company]\n\t\t\t\t]\n\t\t\t};\n    \t});\n\t}\n});\n",
   "view": "Form"
  },
  {
